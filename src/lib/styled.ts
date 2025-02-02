@@ -14,7 +14,7 @@ const GlobalStyle = createGlobalStyle`
         (font) => `
         @font-face {
           font-family: "TTFirsNeue";
-          src: url("https:://cdn.djoreh64.ru/fonts/${font.fileName}.woff2") format("woff2");
+          src: url("https://cdn.djoreh64.ru/fonts/${font.fileName}.woff2") format("woff2");
           font-weight: ${font.fontWeight};
           font-style: normal;
         }
@@ -26,8 +26,11 @@ const GlobalStyle = createGlobalStyle`
       box-sizing: border-box;
     }
 
-    html, body {
-      scrollbar-gutter: stable;
+    html {
+      scroll-behavior: smooth;
+      ::-webkit-scrollbar {
+        display: none;
+      }
     }
     
     body {

@@ -1,5 +1,3 @@
-import MainLayout from "@layouts/mainLayout";
-
-const Cart = () => <MainLayout>Корзина</MainLayout>;
+const Cart = () => <>Корзина</>;
 
 export default Cart;

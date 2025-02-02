@@ -8,16 +8,14 @@ export const metadata: Metadata = {
   description: "OZON",
 };
 
-const RootLayout = ({ children }: Readonly<PropsWithChildren>) => {
-  return (
-    <html lang="ru">
-      <body>
-        <StyledComponentsRegistry>
-          <MainLayout>{children}</MainLayout>
-        </StyledComponentsRegistry>
-      </body>
-    </html>
-  );
-};
+const RootLayout = ({ children }: Readonly<PropsWithChildren>) => (
+  <html lang="ru">
+    <body>
+      <StyledComponentsRegistry>
+        <MainLayout>{children}</MainLayout>
+      </StyledComponentsRegistry>
+    </body>
+  </html>
+);
 
 export default RootLayout;

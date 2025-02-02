@@ -3,13 +3,14 @@ import React, { FC } from "react";
 
 interface Props {
   src: string;
+  size?: number;
 }
 
-const NavbarIcon: FC<Props> = ({ src }) => (
+const NavbarIcon: FC<Props> = ({ src, size = 24 }) => (
   <StyledNavbarIcon
-    src={`${process.env.CDN_PATH}/icons/${src}.svg`}
-    width={24}
-    height={24}
+    src={`${process.env.NEXT_PUBLIC_CDN_PATH}/icons/${src}.svg`}
+    width={size}
+    height={size}
     alt=""
   />
 );

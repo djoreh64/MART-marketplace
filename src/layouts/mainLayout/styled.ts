@@ -3,10 +3,10 @@
 import styled from "styled-components";
 
 const StyledMainLayout = styled.div`
-  padding-top: 120px;
+  padding-top: 100px;
 
   @media screen and (max-width: 768px) {
-    padding-top: 80px;
+    padding-top: 10px;
   }
 `;
 

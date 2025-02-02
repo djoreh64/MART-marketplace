@@ -8,15 +8,17 @@ import styled from "styled-components";
 export const Container = styled.header`
   position: fixed;
   width: 100%;
-  height: 75px;
+  padding: 16px 0;
   top: 0;
   left: 0;
   color: #000;
   background-color: #fff;
 
   @media screen and (max-width: 768px) {
+    position: relative;
+    margin-bottom: 12px;
     padding: 6px;
-    border-radius: 24px;
+    border-radius: 0 0 24px 24px;
     height: unset;
   }
 `;
@@ -34,6 +36,33 @@ export const Navbar = styled.nav`
 
   @media screen and (max-width: 768px) {
     display: none;
+  }
+`;
+
+export const MobileNavbar = styled.nav`
+  display: none;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 12px 25px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top: 1px solid ${({ theme }) => theme.colors.textLighter};
+  background-color: ${({ theme }) => theme.colors.base};
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+  }
+`;
+
+export const MobileHeader = styled.div`
+  display: none;
+  padding-bottom: 6px;
+  @media screen and (max-width: 768px) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 `;
 
@@ -65,7 +94,7 @@ export const SearchInput = styled(Input).attrs({
 export const SearchButton = styled(Button)`
   border-radius: 0 6px 6px 0;
   display: flex;
-  padding: 12px 12px;
+  padding: 14px 12px;
   align-items: center;
   justify-content: center;
   &:active,
@@ -80,7 +109,8 @@ export const SearchInputHolder = styled.div`
   position: relative;
   border-radius: 14px;
   overflow: hidden;
-  border: 1px solid ${({ theme }) => theme.colors.primary};
+  border: 2px solid ${({ theme }) => theme.colors.primary};
+  border-left-width: 3px;
   &::before {
     content: "";
     position: absolute;
@@ -113,14 +143,16 @@ export const NavbarList = styled.ul`
 
 export const NavbarIcon = styled.img`
   transition: 0.1s ease-out;
-  filter: saturate(0) brightness(2.5);
 `;
 
-export const NavbarListLink = styled(Link)`
+export const NavbarListLink = styled(Link)<{
+  $active?: boolean;
+}>`
   display: flex;
   align-items: center;
   gap: 5px;
-  color: inherit;
+  color: ${({ theme, $active }) =>
+    $active ? theme.colors.primary : theme.colors.text};
   text-decoration: none;
   transition: 0.2s ease-out;
   &:hover {
@@ -129,19 +161,14 @@ export const NavbarListLink = styled(Link)`
     }
     color: ${({ theme }) => theme.colors.primary};
   }
+
+  img {
+    filter: ${({ $active }) =>
+      $active ? "saturate(1)" : "saturate(0) brightness(2.5)}"};
+  }
 `;
 
 export const NavbarListText = styled.span`
   color: inherit;
   text-decoration: none;
-`;
-
-export const MobileNavbar = styled.nav`
-  display: none;
-  padding-bottom: 6px;
-  @media screen and (max-width: 768px) {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
 `;

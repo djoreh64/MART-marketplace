@@ -15,3 +15,12 @@ export const navbarListItems = [
     text: "Избранное",
   },
 ];
+
+export const navbarListItemsMobile = [
+  {
+    src: "home",
+    href: "/",
+    text: "Главная",
+  },
+  ...navbarListItems,
+];

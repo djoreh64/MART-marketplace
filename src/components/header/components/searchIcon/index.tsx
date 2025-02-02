@@ -3,9 +3,9 @@ import React from "react";
 
 const SearchIcon = () => (
   <Image
-    src={`${process.env.CDN_PATH}/icons/search.svg`}
-    width={24}
-    height={24}
+    src={`${process.env.NEXT_PUBLIC_CDN_PATH}/icons/search.svg`}
+    width={20}
+    height={20}
     alt="Поиск"
   />
 );

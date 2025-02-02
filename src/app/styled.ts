@@ -8,7 +8,7 @@ import styled from "styled-components";
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 18px;
   padding-bottom: 72px;
 
   @media screen and (max-width: 768px) {
@@ -38,6 +38,8 @@ export const Recommendations = styled.div`
   background-color: #ebdabb;
 
   @media screen and (max-width: 768px) {
+    grid-row: 3; 
+    grid-column: 1 / -1; 
     padding: 20px;
   }
 `;
