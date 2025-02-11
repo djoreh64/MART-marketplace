@@ -1,6 +1,7 @@
+import { FC } from "react";
 import * as S from "../styled";
 
-const Recommendations = () => (
+const Recommendations: FC = () => (
   <S.Recommendations>
     <S.RecommendationsSubtitle>Рекомендуем</S.RecommendationsSubtitle>
     <S.RecommendationsTitle>Для дома и сада</S.RecommendationsTitle>

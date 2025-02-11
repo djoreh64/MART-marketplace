@@ -1,4 +1,4 @@
-import { NavbarIcon as StyledNavbarIcon } from "@components/header/styled";
+import { NavbarIcon as StyledNavbarIcon } from "@components/shared/header/styled";
 import React, { FC } from "react";
 
 interface Props {

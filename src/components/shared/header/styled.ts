@@ -11,8 +11,8 @@ export const Container = styled.header`
   padding: 16px 0;
   top: 0;
   left: 0;
-  color: #000;
-  background-color: #fff;
+  color: ${({ theme }) => theme.colors.text};
+  background-color: ${({ theme }) => theme.colors.grayDark};
 
   @media screen and (max-width: 768px) {
     position: relative;
@@ -88,6 +88,10 @@ export const SearchInput = styled(Input).attrs({
 
   @media screen and (max-width: 768px) {
     width: 100%;
+    &:focus {
+      border: 0;
+      outline: none;
+    }
   }
 `;
 
@@ -99,11 +103,11 @@ export const SearchButton = styled(Button)`
   justify-content: center;
   &:active,
   &:hover {
-    transform: scale(1);
+    scale: 1;
   }
 `;
 
-export const SearchInputHolder = styled.div`
+export const SearchInputHolder = styled.div<{ $icon?: boolean }>`
   display: flex;
   align-items: center;
   position: relative;
@@ -116,7 +120,7 @@ export const SearchInputHolder = styled.div`
     position: absolute;
     top: 50%;
     right: 40px;
-    transform: translateY(-50%);
+    translate: 0 -50%;
     width: 100%;
     height: 100%;
     z-index: -1;
@@ -125,10 +129,16 @@ export const SearchInputHolder = styled.div`
 
   @media screen and (max-width: 768px) {
     width: 100%;
+    padding: ${({ $icon }) => ($icon ? "0px 16px" : "0")};
+    background-color: ${({ theme }) => theme.colors.base};
     border: 1px solid ${({ theme }) => theme.colors.textLighter};
     border-radius: 24px;
     &::before {
       display: none;
+    }
+
+    input {
+      padding-left: ${({ $icon }) => ($icon ? "6px" : "16px")};
     }
   }
 `;

@@ -10,4 +10,8 @@ export const StyledInput = styled.input`
   border-radius: 8px;
   border: 1px solid #c2c2c2;
   transition: 0.2s ease-out;
+
+  &:focus-visible {
+    outline: 1px solid ${({ theme }) => theme.colors.primary};
+  }
 `;

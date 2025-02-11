@@ -22,6 +22,11 @@ export const Container = styled.div`
   grid-template-rows: repeat(2, 1fr);
   gap: 21px;
 
+  @media screen and (max-width: 1440px) {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+
   @media screen and (max-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
@@ -38,8 +43,8 @@ export const Recommendations = styled.div`
   background-color: #ebdabb;
 
   @media screen and (max-width: 768px) {
-    grid-row: 3; 
-    grid-column: 1 / -1; 
+    grid-row: 3;
+    grid-column: 1 / -1;
     padding: 20px;
   }
 `;
@@ -94,8 +99,8 @@ export const Card = styled(Link)`
   border: 1px solid ${({ theme }) => theme.colors.textLighter};
   border-radius: 18px;
   text-decoration: none;
-  color: inherit;
-  background-color: ${({ theme }) => theme.colors.base};
+  color: ${({ theme }) => theme.colors.text};
+  background-color: ${({ theme }) => theme.colors.grayDark};
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.05);
   transition: 0.2s ease-out;
   &:hover {
@@ -189,6 +194,8 @@ export const Banner = styled(Image)`
   height: 100%;
 
   @media screen and (max-width: 768px) {
-    display: none;
+    height: 100px;
+    border-radius: 12px;
+    object-fit: cover;
   }
 `;

@@ -1,19 +1,23 @@
 "use client";
-
+import { FC } from "react";
 import * as S from "../styled";
 import Image from "next/image";
 
-const ProductCard = () => {
+interface Props {
+  href: string;
+}
+
+const Card: FC<Props> = ({ href }) => {
   const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
   };
 
   return (
-    <S.Card href="/">
+    <S.Card href={href}>
       <S.CardImageHolder>
         <S.CardImage
-          src="/flower.jpg"
+          src={`/flower.jpg`}
           alt="Комнатный цветок"
           width={300}
           height={160}
@@ -27,7 +31,7 @@ const ProductCard = () => {
               <S.OldPrice>999 ₽</S.OldPrice>
               <S.Sale>-10%</S.Sale>
             </S.OldPriceHolder>
-            <S.Price>499.00 ₽</S.Price>
+            <S.Price>499 ₽</S.Price>
           </S.Prices>
           <S.CardButton onClick={handleAddToCart} primary>
             <Image
@@ -43,4 +47,4 @@ const ProductCard = () => {
   );
 };
 
-export default ProductCard;
+export default Card;

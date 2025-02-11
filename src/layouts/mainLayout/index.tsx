@@ -1,6 +1,6 @@
 import React, { FC, PropsWithChildren } from "react";
 import { StyledContainer, StyledMainLayout } from "./styled";
-import Header from "@components/header";
+import Header from "@components/shared/header";
 
 const MainLayout: FC<PropsWithChildren> = ({ children }) => (
   <StyledMainLayout>

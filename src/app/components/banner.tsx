@@ -1,14 +1,15 @@
-import React from "react";
+import React, { FC } from "react";
 import * as S from "../styled";
 
-export const Banner = () => {
-  return (
-    <S.Banner
-      src="/banner.jpg"
-      width={1350}
-      height={229}
-      alt="Баннер распродажа"
-      priority
-    />
-  );
-};
+const Banner: FC = () => (
+  <S.Banner
+    src="/banner.png"
+    width={1350}
+    height={229}
+    alt="Баннер распродажа"
+    placeholder="blur"
+    blurDataURL={"/banner.png"}
+  />
+);
+
+export default Banner;

@@ -26,6 +26,16 @@ const GlobalStyle = createGlobalStyle`
       box-sizing: border-box;
     }
 
+    img, button, a, input {
+      user-select: none;
+    }
+
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
     html {
       scroll-behavior: smooth;
       ::-webkit-scrollbar {
@@ -36,7 +46,7 @@ const GlobalStyle = createGlobalStyle`
     body {
       margin: 0;
       padding: 0;
-      background-color: #F6F9FB;
+      background-color: ${({ theme }) => theme.colors.bg};
       font-family: "TT Firs Neue", sans-serif;
     }
 
@@ -56,14 +66,40 @@ const lightTheme = {
     text: "#000000",
     textLight: "#00000050",
     textLighter: "#00000010",
+    grayDark: "#ffffff",
     primary: "#005BFF",
     primaryLight: "#005BFF50",
     primaryLighter: "#005BFF10",
+    success: "#10C44C",
+    successLight: "#10C44C50",
+    successLighter: "#10C44C10",
+    error: "#F91155",
+    errorLight: "#F9115550",
+    errorLighter: "#F9115510",
+    icon: "#808080",
     bg: "#f8f9fa",
   },
   fonts: {
     main: "TT Firs Neue, sans-serif",
   },
 };
+
+// const darkTheme = {
+//   colors: {
+//     base: "#000000",
+//     text: "#FFFFFF",
+//     textLight: "#ffffff50",
+//     textLighter: "#ffffff10",
+//     grayDark: "#3E3E3E",
+//     primary: "#4386FF",
+//     primaryLight: "#4386FF50",
+//     primaryLighter: "#4386FF10",
+//     icon: "#808080",
+//     bg: "#2D2D2D",
+//   },
+//   fonts: {
+//     main: "TT Firs Neue, sans-serif",
+//   },
+// };
 
 export { GlobalStyle, lightTheme };
