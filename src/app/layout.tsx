@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import { PropsWithChildren } from "react";
 
 export const metadata: Metadata = {
-  title: "OZON | Главная",
+  title: "Главная | OZON",
   description: "OZON",
 };
 

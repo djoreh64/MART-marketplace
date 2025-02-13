@@ -197,9 +197,10 @@ export const FavoriteButton = styled(Button)`
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 4px;
   width: 50px;
   height: 50px;
+  border: none;
   background-color: ${(props) => props.theme.colors.primaryLighter};
   border-radius: 12px;
-  gap: 4px;
 `;

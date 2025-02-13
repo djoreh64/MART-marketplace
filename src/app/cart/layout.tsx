@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { FC, PropsWithChildren } from "react";
 
 export const metadata: Metadata = {
-  title: "OZON | Корзина",
+  title: "Корзина | OZON",
   description: "OZON",
 };
 
