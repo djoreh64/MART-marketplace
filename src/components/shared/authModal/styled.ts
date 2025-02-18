@@ -62,11 +62,16 @@ export const ModalButton = styled(Button)`
   font-size: 16px;
   font-weight: 400;
   margin-top: 16px;
+  height: 60px;
 
   &:focus-visible,
   &:hover {
     scale: 1.01;
     outline: 0;
+  }
+
+  &:active {
+    scale: 0.99;
   }
 `;
 

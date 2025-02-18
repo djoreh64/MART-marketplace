@@ -1,15 +1,28 @@
 import React, { ButtonHTMLAttributes, FC, PropsWithChildren } from "react";
-import { StyledButton } from "./styled";
+import { StyledButton, Loader, LoaderWrapper } from "./styled";
 
 interface Props
   extends PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>> {
   primary?: boolean;
   icon?: boolean;
+  loading?: boolean;
 }
 
-const Button: FC<Props> = ({ children, primary, icon, ...props }) => (
-  <StyledButton $primary={primary} $icon={icon} {...props}>
-    {children}
+const Button: FC<Props> = ({
+  children,
+  primary,
+  icon,
+  loading = false,
+  ...props
+}) => (
+  <StyledButton disabled={loading} $primary={primary} $icon={icon} {...props}>
+    {!loading ? (
+      children
+    ) : (
+      <LoaderWrapper>
+        <Loader />
+      </LoaderWrapper>
+    )}
   </StyledButton>
 );
 

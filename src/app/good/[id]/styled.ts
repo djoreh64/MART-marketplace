@@ -22,20 +22,41 @@ export const ImageHolder = styled.div`
   justify-content: center;
   border-radius: 24px;
   overflow: hidden;
+  height: 600px;
 
   img {
     width: 100%;
+    height: 100%;
     object-fit: cover;
   }
 
   @media (max-width: 768px) {
     height: 300px;
+    padding: 12px;
+    background-color: ${(props) => props.theme.colors.base};
+    img {
+      height: 100%;
+      border-radius: 18px
+    }
   }
 `;
 
 export const Info = styled.div`
   display: flex;
+  @media screen and (max-width: 768px) {
+    padding: 16px;
+    background-color: ${(props) => props.theme.colors.base};
+    border: 1px solid ${(props) => props.theme.colors.textLighter};
+    border-radius: 24px;
+  }
   flex-direction: column;
+
+  @media screen and (max-width: 768px) {
+    padding: 16px;
+    background-color: ${(props) => props.theme.colors.base};
+    border: 1px solid ${(props) => props.theme.colors.textLighter};
+    border-radius: 24px;
+  }
 `;
 
 export const Name = styled.h1`
@@ -44,14 +65,17 @@ export const Name = styled.h1`
   margin-top: 0;
 
   @media (max-width: 768px) {
-    font-size: 24px;
-    margin-top: 0;
+    font-size: 20px;
   }
 `;
 
 export const Rating = styled.div`
   font-size: 20px;
   font-weight: 400;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 export const RatingHolder = styled.div`
@@ -63,6 +87,10 @@ export const RatingHolder = styled.div`
 export const Reviews = styled.div`
   font-size: 20px;
   font-weight: 400;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 export const About = styled.h3`
@@ -72,7 +100,7 @@ export const About = styled.h3`
   margin-top: 24px;
 
   @media (max-width: 768px) {
-    font-size: 24px;
+    font-size: 20px;
     margin-top: 12px;
   }
 `;
@@ -118,9 +146,9 @@ export const PurchaseBlock = styled.div`
 
   @media (max-width: 768px) {
     position: fixed;
-    bottom: 110px;
-    left: 0;
-    right: 0;
+    bottom: 120px;
+    left: 12px;
+    right: 12px;
     padding: 12px;
   }
 `;
@@ -172,7 +200,7 @@ export const Buttons = styled.div`
     left: 0;
     right: 0;
     padding: 12px;
-    background-color: ${(props) => props.theme.colors.base};
+    background-color: ${(props) => props.theme.colors.bg};
   }
 `;
 

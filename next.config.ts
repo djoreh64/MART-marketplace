@@ -13,6 +13,16 @@ const nextConfig: NextConfig = {
         hostname: "djoreh64.ru",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "avatars.mds.yandex.net",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "i.pinimg.com",
+        pathname: "/**",
+      },
     ],
   },
   compiler: {

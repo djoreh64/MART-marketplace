@@ -61,18 +61,50 @@ export const Delivery = styled.div`
 `;
 
 export const Good = styled.div`
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-areas: "main price quantity";
+  grid-template-columns: 3fr 1fr 2fr;
+  align-items: center;
   gap: 18px;
 
   @media (max-width: 768px) {
-    flex-direction: column;
+    grid-template-areas:
+      "main main"
+      "price quantity";
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
   }
 `;
 
 export const GoodMain = styled.div`
+  grid-area: main;
   display: flex;
   gap: 18px;
+  align-items: center;
+`;
+
+export const GoodPriceHolder = styled.div`
+  grid-area: price;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+
+  @media (max-width: 768px) {
+    justify-self: start;
+  }
+`;
+
+export const GoodQuantity = styled.div`
+  grid-area: quantity;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+
+  @media (max-width: 768px) {
+    justify-self: end;
+  }
 `;
 
 export const GoodImage = styled.img`
@@ -84,7 +116,6 @@ export const GoodImage = styled.img`
 export const GoodInfo = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   gap: 12px;
 `;
 
@@ -120,28 +151,11 @@ export const GoodActionsItem = styled.button`
   }
 `;
 
-export const GoodActionsItemIcon = styled.div`
-  width: 12px;
-  height: 12px;
-  border-radius: 12px;
-  background-color: #f5f7fa;
-`;
-
 export const GoodPrice = styled.div`
   margin: 0;
   font-size: 18px;
   font-weight: 600;
   color: ${({ theme }) => theme.colors.success};
-`;
-
-export const GoodPriceHolder = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-
-  @media (max-width: 768px) {
-    gap: 2px;
-  }
 `;
 
 export const GoodOldPrice = styled.div`
@@ -151,10 +165,10 @@ export const GoodOldPrice = styled.div`
   color: #637381;
 `;
 
-export const GoodQuantity = styled.div`
+export const GoodQuantityButtons = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 8px;
+  justify-content: space-between;
+  gap: 4px;
 `;
 
 export const GoodQuantityButton = styled.button`
@@ -173,6 +187,22 @@ export const GoodQuantityButton = styled.button`
   &:active {
     transform: scale(0.9);
   }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: auto;
+    svg {
+      stroke: ${({ theme }) => theme.colors.textLight};
+    }
+  }
+`;
+
+export const GoodQuantityInputHolder = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 32px;
 `;
 
 export const GoodQuantityInput = styled.input`
@@ -186,12 +216,18 @@ export const GoodQuantityInput = styled.input`
   font-size: 14px;
 `;
 
-export const GoodQuantityInputHolder = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 46px;
-  height: 32px;
+export const GoodQuantityTotal = styled.div`
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: #637381;
+`;
+
+export const GoodActionsItemIcon = styled.div`
+  width: 12px;
+  height: 12px;
+  border-radius: 12px;
+  background-color: #f5f7fa;
 `;
 
 export const GoodTotal = styled.div`
@@ -201,24 +237,11 @@ export const GoodTotal = styled.div`
   color: #637381;
 `;
 
-export const GoodQuantityButtons = styled.div`
-  display: flex;
-  justify-content: space-between;
-  gap: 4px;
-`;
-
 export const GoodQuantityButtonsHolder = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 4px;
-`;
-
-export const GoodQuantityTotal = styled.div`
-  margin: 0;
-  font-size: 14px;
-  font-weight: 400;
-  color: #637381;
 `;
 
 export const BuyButton = styled.button`

@@ -1,10 +1,9 @@
 "use client";
 
 import React, { FC, useState } from "react";
-import * as S from "../styled";
 import ActionsItemIcon from "./actionsItemIcon";
 import { Minus, Plus } from "lucide-react";
-import useScreenSize from "@hooks/useScreenSize";
+import * as S from "../styled";
 
 interface Props {
   name: string;
@@ -15,63 +14,17 @@ interface Props {
 
 const Good: FC<Props> = ({ name, price, oldPrice, image }) => {
   const [goodQuantity, setGoodQuantity] = useState(1);
-  const { isMobile } = useScreenSize();
 
-  if (isMobile) {
-    return (
-      <S.Good>
-        <S.GoodMain>
-          <S.GoodImage src={image} alt="" width={77} height={70} />
-          <S.GoodInfo>
-            <S.GoodName>{name}</S.GoodName>
-            <S.GoodPriceHolder>
-              <S.GoodPrice>{price}₽</S.GoodPrice>
-              <S.GoodOldPrice>{oldPrice}₽ без скидки</S.GoodOldPrice>
-            </S.GoodPriceHolder>
-          </S.GoodInfo>
-        </S.GoodMain>
-
-        <S.GoodQuantity>
-          <S.GoodQuantityButtons>
-            <S.GoodActions>
-              <S.GoodActionsItem>
-                <ActionsItemIcon type="favourite" />
-              </S.GoodActionsItem>
-              <S.GoodActionsItem>
-                <ActionsItemIcon type="delete" />
-              </S.GoodActionsItem>
-            </S.GoodActions>
-            <S.GoodQuantityButtonsHolder>
-              <S.GoodQuantityButton
-                onClick={() => setGoodQuantity(goodQuantity - 1)}
-                disabled={goodQuantity === 1}
-              >
-                <Minus width={20} height={20} />
-              </S.GoodQuantityButton>
-              <S.GoodQuantityInputHolder>
-                <S.GoodQuantityInput
-                  min={1}
-                  value={goodQuantity || ""}
-                  type="number"
-                  onChange={(e) => setGoodQuantity(Number(e.target.value))}
-                />
-              </S.GoodQuantityInputHolder>
-              <S.GoodQuantityButton
-                onClick={() => setGoodQuantity(goodQuantity + 1)}
-              >
-                <Plus />
-              </S.GoodQuantityButton>
-            </S.GoodQuantityButtonsHolder>
-          </S.GoodQuantityButtons>
-        </S.GoodQuantity>
-      </S.Good>
-    );
-  }
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setGoodQuantity(Number(e.target.value));
+  const handleBlur = () => goodQuantity < 1 && setGoodQuantity(1);
+  const increaseQuantity = () => setGoodQuantity(goodQuantity + 1);
+  const decreaseQuantity = () => setGoodQuantity(goodQuantity - 1);
 
   return (
     <S.Good>
       <S.GoodMain>
-        <S.GoodImage src={image} alt="" width={77} height={70} />
+        <S.GoodImage src={image} alt={name} width={77} height={70} />
         <S.GoodInfo>
           <S.GoodName>{name}</S.GoodName>
           <S.GoodActions>
@@ -91,7 +44,7 @@ const Good: FC<Props> = ({ name, price, oldPrice, image }) => {
       <S.GoodQuantity>
         <S.GoodQuantityButtons>
           <S.GoodQuantityButton
-            onClick={() => setGoodQuantity(goodQuantity - 1)}
+            onClick={decreaseQuantity}
             disabled={goodQuantity === 1}
           >
             <Minus width={20} height={20} />
@@ -101,12 +54,11 @@ const Good: FC<Props> = ({ name, price, oldPrice, image }) => {
               min={1}
               value={goodQuantity || ""}
               type="number"
-              onChange={(e) => setGoodQuantity(Number(e.target.value))}
+              onChange={handleChange}
+              onBlur={handleBlur}
             />
           </S.GoodQuantityInputHolder>
-          <S.GoodQuantityButton
-            onClick={() => setGoodQuantity(goodQuantity + 1)}
-          >
+          <S.GoodQuantityButton onClick={increaseQuantity}>
             <Plus />
           </S.GoodQuantityButton>
         </S.GoodQuantityButtons>

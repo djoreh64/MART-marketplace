@@ -8,7 +8,7 @@ import * as S from "../styled";
 const Inputs: FC = () => (
   <S.Inputs>
     {inputFields.map((props) => (
-      <InputField key={props.placeholder} {...props} />
+      <InputField key={props.placeholder} required {...props} />
     ))}
   </S.Inputs>
 );

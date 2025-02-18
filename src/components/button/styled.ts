@@ -18,8 +18,7 @@ export const StyledButton = styled.button<{
   font-weight: ${({ $primary }) => ($primary ? "500" : "400")};
   font-family: inherit;
   line-height: 24px;
-  color: ${({ $primary, theme }) =>
-    $primary ? "#fff" : theme.colors.text};
+  color: ${({ $primary, theme }) => ($primary ? "#fff" : theme.colors.text)};
   background-color: ${({ $primary, theme }) =>
     $primary ? theme.colors.primary : theme.colors.grayDark};
   cursor: pointer;
@@ -29,5 +28,33 @@ export const StyledButton = styled.button<{
   }
   &:active {
     scale: 0.95;
+  }
+`;
+
+export const LoaderWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+`;
+
+export const Loader = styled.span`
+  width: 48px;
+  height: 48px;
+  background: #fff;
+  display: inline-block;
+  border-radius: 50%;
+  box-sizing: border-box;
+  animation: animloader 1s ease-in infinite;
+
+  @keyframes animloader {
+    0% {
+      transform: scale(0);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0;
+    }
   }
 `;

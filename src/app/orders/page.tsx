@@ -5,8 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Orders: FC = () => {
-  // const isOrdersEmpty = true;
-  const isOrdersEmpty = false;
+  const isOrdersEmpty = true;
+  // const isOrdersEmpty = false;
 
   if (isOrdersEmpty) {
     return (

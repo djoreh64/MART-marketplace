@@ -6,7 +6,7 @@ const StyledMainLayout = styled.div`
   padding-top: 100px;
 
   @media screen and (max-width: 768px) {
-    padding-top: 10px;
+    padding-top: 0;
   }
 `;
 

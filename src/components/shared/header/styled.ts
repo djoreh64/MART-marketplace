@@ -130,9 +130,10 @@ export const SearchInputHolder = styled.div<{ $icon?: boolean }>`
   @media screen and (max-width: 768px) {
     width: 100%;
     padding: ${({ $icon }) => ($icon ? "0px 16px" : "0")};
+    padding-top: 12px;
     background-color: ${({ theme }) => theme.colors.base};
     border: 1px solid ${({ theme }) => theme.colors.textLighter};
-    border-radius: 24px;
+    border-radius: 0 0 24px 24px;
     &::before {
       display: none;
     }

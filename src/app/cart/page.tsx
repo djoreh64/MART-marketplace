@@ -1,12 +1,19 @@
-import { FC } from "react";
+"use client";
+
+import { FC, useState } from "react";
 import * as S from "./styled";
 import Good from "./components/Good";
 import Image from "next/image";
 import Link from "next/link";
+import toast from "react-hot-toast";
 
 const Cart: FC = () => {
-  // const isCartEmpty = true;
-  const isCartEmpty = false;
+  const [isCartEmpty, setIsCartEmpty] = useState(false);
+
+  const handleBuy = () => {
+    setIsCartEmpty(true);
+    toast.success("Заказ успешно оформлен");
+  };
 
   if (isCartEmpty) {
     return (
@@ -42,7 +49,7 @@ const Cart: FC = () => {
           />
         </S.Block>
         <S.Block>
-          <S.BuyButton>Оформить заказ</S.BuyButton>
+          <S.BuyButton onClick={handleBuy}>Оформить заказ</S.BuyButton>
           <S.BuyBlock>
             <S.BuyHeader>
               <S.BuyHeaderTitle>Ваша корзина</S.BuyHeaderTitle>

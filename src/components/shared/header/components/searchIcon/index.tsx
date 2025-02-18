@@ -1,7 +1,7 @@
 import Image from "next/image";
-import React from "react";
+import React, { FC } from "react";
 
-const SearchIcon = () => (
+const SearchIcon: FC = () => (
   <Image
     src={`${process.env.NEXT_PUBLIC_CDN_PATH}/icons/search.svg`}
     width={20}

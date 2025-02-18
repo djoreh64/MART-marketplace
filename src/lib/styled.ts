@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 const fontFaces = [
   { fileName: "TTFirsNeue-Regular", fontWeight: 400 },
@@ -59,6 +59,14 @@ const GlobalStyle = createGlobalStyle`
     }
 
   `;
+
+export const ErrorPage = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+`;
 
 const lightTheme = {
   colors: {

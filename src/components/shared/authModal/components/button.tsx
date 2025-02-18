@@ -3,9 +3,13 @@ import { ModalButton as StyledModalButton } from "../styled";
 import { authTexts as texts } from "../data";
 import { useAuthContextValue } from "../hooks/useAuthContextValue";
 
-const ModalButton: FC = () => {
+interface Props {
+  loading?: boolean;
+}
+
+const ModalButton: FC<Props> = ({ loading }) => {
   const { authType: type } = useAuthContextValue();
-  return <StyledModalButton primary>{texts[type].button}</StyledModalButton>;
+  return <StyledModalButton loading={loading} primary>{texts[type].button}</StyledModalButton>;
 };
 
 export default ModalButton;
