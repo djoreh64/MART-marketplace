@@ -1,12 +1,11 @@
 import { FC } from "react";
 import * as S from "./styled";
-import { Banner, Card, Recommendations } from "./components";
+import Card from "./components/card";
 
-const Home: FC = () => (
+const Favourites: FC = () => (
   <S.Content>
-    <Banner />
+    <S.Headline>Избранное</S.Headline>
     <S.Container>
-      <Recommendations />
       {Array.from({ length: 8 }).map((_, i) => (
         <Card href={`/good/${i}`} key={i} />
       ))}
@@ -14,4 +13,4 @@ const Home: FC = () => (
   </S.Content>
 );
 
-export default Home;
+export default Favourites;

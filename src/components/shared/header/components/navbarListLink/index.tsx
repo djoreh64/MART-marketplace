@@ -8,7 +8,7 @@ interface Props extends PropsWithChildren {
   href: string;
 }
 
-export const NavbarListLink: FC<Props> = ({ href, children }) => {
+const NavbarListLink: FC<Props> = ({ href, children }) => {
   const isActive = useActivePath(href);
   return (
     <S.NavbarListLink $active={isActive} href={href}>
@@ -16,3 +16,5 @@ export const NavbarListLink: FC<Props> = ({ href, children }) => {
     </S.NavbarListLink>
   );
 };
+
+export default NavbarListLink;

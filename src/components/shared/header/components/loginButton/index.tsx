@@ -1,12 +1,12 @@
 "use client";
 
 import Button from "@components/button";
-import { useModalStore } from "@stores/modal.store";
+import { useRouter } from "next/navigation";
 import React, { FC, PropsWithChildren } from "react";
 
 const LoginButton: FC<PropsWithChildren> = ({ children }) => {
-  const { setAuthModalVisible } = useModalStore();
-  return <Button onClick={() => setAuthModalVisible(true)}>{children}</Button>;
+  const router = useRouter();
+  return <Button onClick={() => router.push("/login")}>{children}</Button>;
 };
 
 export default LoginButton;

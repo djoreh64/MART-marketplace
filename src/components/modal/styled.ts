@@ -11,10 +11,10 @@ export const Modal = styled.div<{ $isOpen: boolean }>`
   height: 100%;
   backdrop-filter: blur(5px);
   background-color: rgba(0, 0, 0, 0.2);
-  animation: modal 0.2s ease-out;
-  opacity: ${({ $isOpen }) => ($isOpen ? 1 : 0)};
+  opacity: ${(props) => (props.$isOpen ? 1 : 0)};
   z-index: 100;
   transition: 0.2s ease-out;
+  animation: modal 0.2s ease-out;
 
   @keyframes modal {
     from {

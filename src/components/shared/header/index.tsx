@@ -2,23 +2,25 @@
 
 import Button from "@components/button";
 import useScreenSize from "@hooks/useScreenSize";
-import { ChevronLeft, Menu } from "lucide-react";
+import { ChevronLeft, Menu, SearchIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { FC } from "react";
-import LoginButton from "./components/loginButton";
-import NavbarIcon from "./components/navbarIcon";
-import { NavbarListLink } from "./components/navbarListLink";
-import SearchIcon from "./components/searchIcon";
+import { FC, useEffect, useState } from "react";
 import { navbarListItems, navbarListItemsMobile } from "./data";
 import * as S from "./styled";
+import { LoginButton, NavbarIcon } from "./components";
 
 const Header: FC = () => {
+  const [isMobileScreen, setIsMobileScreen] = useState(false);
   const { isMobile } = useScreenSize();
   const pathname = usePathname();
   const router = useRouter();
-  
-  if (isMobile) {
+
+  useEffect(() => {
+    setIsMobileScreen(isMobile);
+  }, [isMobile]);
+
+  if (isMobileScreen) {
     return (
       <>
         <S.MobileHeader>
@@ -33,9 +35,9 @@ const Header: FC = () => {
         </S.MobileHeader>
         <S.MobileNavbar>
           {navbarListItemsMobile.map(({ src, href }) => (
-            <NavbarListLink href={href} key={src}>
+            <S.NavbarListLink $active={pathname === href} href={href} key={src}>
               <NavbarIcon size={30} src={src} />
-            </NavbarListLink>
+            </S.NavbarListLink>
           ))}
         </S.MobileNavbar>
       </>
@@ -58,10 +60,10 @@ const Header: FC = () => {
         </S.SearchInputHolder>
         <S.NavbarList>
           {navbarListItems.map(({ src, href, text }) => (
-            <NavbarListLink href={href} key={src}>
+            <S.NavbarListLink $active={pathname === href} href={href} key={src}>
               <NavbarIcon src={src} />
               <S.NavbarListText>{text}</S.NavbarListText>
-            </NavbarListLink>
+            </S.NavbarListLink>
           ))}
         </S.NavbarList>
         <LoginButton>Войти</LoginButton>

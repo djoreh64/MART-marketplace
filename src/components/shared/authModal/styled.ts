@@ -68,6 +68,10 @@ export const ModalButton = styled(Button)`
     scale: 1.01;
     outline: 0;
   }
+
+  &:active {
+    scale: 0.99;
+  }
 `;
 
 export const Icon = styled.div`
