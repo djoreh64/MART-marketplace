@@ -1,3 +1,6 @@
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 import { FC } from "react";
 import * as S from "./styled";
 import { Banner, Card, Recommendations } from "./components";
@@ -5,7 +8,7 @@ import { IGood } from "@app/good/[id]/page";
 
 const Home: FC = async () => {
   try {
-    const response = await fetch("https://djoreh64.ru/api/products");
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`);
     const goods: IGood[] = await response.json();
 
     return (
