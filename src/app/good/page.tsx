@@ -56,7 +56,7 @@ const Good = () => {
           </S.OldPriceHolder>
         </S.PriceHolder>
         <S.Buttons>
-          <BuyButton />
+          <BuyButton isInCart={false} productId={Number(id) + 1} />
           <S.FavoriteButton>
             <Heart stroke="#005BFF" size={20} />
           </S.FavoriteButton>

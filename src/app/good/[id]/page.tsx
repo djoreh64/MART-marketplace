@@ -4,10 +4,16 @@ import Image from "next/image";
 import { Heart, Star } from "lucide-react";
 import BuyButton from "./components/buyButton";
 import Goods from "@api/products";
+import { Metadata } from "next";
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
   try {
-    const product = await Goods.getOne(params.id);
+    const id = (await params).id;
+    const product = await Goods.getOne(id);
     return {
       title: `${product.name} | OZON`,
     };
@@ -18,9 +24,10 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   }
 }
 
-const Good = async ({ params }: { params: { id: string } }) => {
+const Good = async ({ params }: { params: Promise<{ id: string }> }) => {
   try {
-    const good = await Goods.getOne(params.id);
+    const id = (await params).id;
+    const good = await Goods.getOne(id);
 
     return (
       <S.Container>
