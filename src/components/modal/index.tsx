@@ -21,7 +21,7 @@ const Modal: FC<PropsWithChildren & Props> = ({ children, isVisible }) => {
     setIsModalVisible(false);
     setTimeout(() => {
       router.back();
-    }, 200);
+    }, 100);
   };
 
   useEffect(() => {
