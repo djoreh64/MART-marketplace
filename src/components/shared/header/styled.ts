@@ -158,7 +158,9 @@ export const NavbarIcon = styled.img`
 
 export const NavbarListLink = styled(Link)<{
   $active?: boolean;
+  $cart?: boolean;
 }>`
+  position: relative;
   display: flex;
   align-items: center;
   gap: 5px;
@@ -177,6 +179,22 @@ export const NavbarListLink = styled(Link)<{
     filter: ${({ $active }) =>
       $active ? "saturate(1)" : "saturate(0) brightness(2.5)}"};
   }
+
+  /* &::before {
+    content: attr(data-count);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: ${({ $cart }) => $cart && "16px"};
+    height: 16px;
+    border-radius: 50%;
+    background-color: ${({ theme }) => theme.colors.error};
+    color: white;
+    font-size: 12px;
+    position: absolute;
+    top: -8px;
+    left: -4px;
+  } */
 `;
 
 export const NavbarListText = styled.span`

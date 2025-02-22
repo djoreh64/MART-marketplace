@@ -6,7 +6,7 @@ import { AuthProvider } from "../provider/authProvider";
 
 const Content: FC<PropsWithChildren> = ({ children }) => {
   return (
-    <Modal isVisible={true} setVisible={() => {}}>
+    <Modal isVisible setVisible={() => {}}>
       <AuthProvider>{children}</AuthProvider>
     </Modal>
   );

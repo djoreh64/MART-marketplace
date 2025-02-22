@@ -1,6 +1,7 @@
 "use client";
 
 import Button from "@components/button";
+import Link from "next/link";
 import styled from "styled-components";
 
 export const Content = styled.div`
@@ -105,6 +106,12 @@ export const GoodQuantity = styled.div`
   @media (max-width: 768px) {
     justify-self: end;
   }
+`;
+
+export const GoodImageHolder = styled(Link)`
+  width: 77px;
+  height: 77px;
+  border-radius: 12px;
 `;
 
 export const GoodImage = styled.img`

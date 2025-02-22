@@ -8,24 +8,25 @@ import Link from "next/link";
 import CartController from "@api/cart";
 import { useCartStore } from "@stores/cart.store";
 import { Loader, LoaderWrapper } from "@components/button/styled";
+import toast from "react-hot-toast";
 
 const Cart: FC = () => {
   const [loading, setLoading] = useState(true);
-  
+
   const setCart = useCartStore((state) => state.setCart);
   const cart = useCartStore((state) => state.cartItems);
   const totalPrice = useCartStore((state) => state.totalPrice);
   const totalSales = useCartStore((state) => state.totalSales);
   const recalculateTotals = useCartStore((state) => state.recalculateTotals);
-
+  const totalCount = useCartStore((state) => state.totalCount);
 
   const getCart = async () => {
     try {
       const { cart } = await CartController.get();
       recalculateTotals(cart);
       setCart(cart);
-    } catch (error) {
-      console.error("Ошибка при получении корзины:", error);
+    } catch {
+      toast.error("Ошибка при получении корзины:");
     } finally {
       setLoading(false);
     }
@@ -47,9 +48,7 @@ const Cart: FC = () => {
     );
   }
 
-  const length = cart.length;
-
-  if (length === 0) {
+  if (cart.length === 0) {
     return (
       <S.EmptyContent>
         <Image
@@ -84,10 +83,10 @@ const Cart: FC = () => {
           <S.BuyBlock>
             <S.BuyHeader>
               <S.BuyHeaderTitle>Ваша корзина</S.BuyHeaderTitle>
-              <S.BuyHeaderText>{length} товаров</S.BuyHeaderText>
+              <S.BuyHeaderText>{totalCount} товаров</S.BuyHeaderText>
             </S.BuyHeader>
             <S.BuyBlockItem>
-              <S.BuyBlockItemTitle>Товары ({length})</S.BuyBlockItemTitle>
+              <S.BuyBlockItemTitle>Товары ({totalCount})</S.BuyBlockItemTitle>
               <S.BuyBlockItemText>{totalPrice}₽</S.BuyBlockItemText>
             </S.BuyBlockItem>
             <S.BuyBlockItem>

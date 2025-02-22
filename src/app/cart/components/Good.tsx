@@ -12,7 +12,7 @@ interface Props {
 }
 
 const Good: FC<Props> = ({ cartItem }) => {
-  const { imageUrl, name, originalPrice, price } = cartItem.product;
+  const { imageUrl, name, originalPrice, price, id } = cartItem.product;
   const {
     deleteCartItem,
     handleDecrease,
@@ -25,7 +25,9 @@ const Good: FC<Props> = ({ cartItem }) => {
   return (
     <S.Good>
       <S.GoodMain>
-        <S.GoodImage src={imageUrl} alt={name} width={77} height={70} />
+        <S.GoodImageHolder href={`/good/${id}`}>
+          <S.GoodImage src={imageUrl} alt={name} width={77} height={70} />
+        </S.GoodImageHolder>
         <S.GoodInfo>
           <S.GoodName>{name}</S.GoodName>
           <S.GoodActions>
@@ -39,8 +41,8 @@ const Good: FC<Props> = ({ cartItem }) => {
         </S.GoodInfo>
       </S.GoodMain>
       <S.GoodPriceHolder>
-        <S.GoodPrice>{price}₽</S.GoodPrice>
-        <S.GoodOldPrice>{originalPrice}₽ без скидки</S.GoodOldPrice>
+        <S.GoodPrice>{price * quantity}₽</S.GoodPrice>
+        <S.GoodOldPrice>{originalPrice * quantity}₽ без скидки</S.GoodOldPrice>
       </S.GoodPriceHolder>
       <S.GoodQuantity>
         <S.GoodQuantityButtons>

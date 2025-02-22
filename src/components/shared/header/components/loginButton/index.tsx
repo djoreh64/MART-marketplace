@@ -11,10 +11,10 @@ const LoginButton: FC = () => {
 
   const logout = async () => {
     const res = await $api.get("/users/logout");
-    if (res.status === 200) {
-      setIsAuth(false);
-      router.push("/");
-    }
+    if (res.status !== 200) return
+    setIsAuth(false);
+    router.push("/");
+    router.refresh();
   };
 
   if (isAuth) return <Button onClick={logout}>Выйти</Button>;

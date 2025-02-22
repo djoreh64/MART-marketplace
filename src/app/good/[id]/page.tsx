@@ -5,6 +5,8 @@ import { Heart, Star } from "lucide-react";
 import BuyButton from "./components/buyButton";
 import Goods from "@api/products";
 import { Metadata } from "next";
+import { ICartItem } from "@api/cart";
+import { serverFetch } from "@utils/serverFetch";
 
 export async function generateMetadata({
   params,
@@ -28,6 +30,13 @@ const Good = async ({ params }: { params: Promise<{ id: string }> }) => {
   try {
     const id = (await params).id;
     const good = await Goods.getOne(id);
+    let cart: ICartItem[] = [];
+
+    try {
+      cart = await serverFetch("/users/cart");
+    } catch {
+      cart = [];
+    }
 
     return (
       <S.Container>
@@ -38,8 +47,8 @@ const Good = async ({ params }: { params: Promise<{ id: string }> }) => {
           <S.Name>{good.name}</S.Name>
           <S.RatingHolder>
             <Star fill="#FFA800" size={16} stroke="#FFA800" />
-            <S.Rating>4.5</S.Rating>
-            <S.Reviews>4 отзыва</S.Reviews>
+            {/* <S.Rating></S.Rating> */}
+            <S.Reviews>Нет отзывов</S.Reviews>
           </S.RatingHolder>
           <S.About>О товаре</S.About>
           <S.Details>
@@ -69,7 +78,13 @@ const Good = async ({ params }: { params: Promise<{ id: string }> }) => {
             </S.OldPriceHolder>
           </S.PriceHolder>
           <S.Buttons>
-            <BuyButton productId={good.id} isInCart={false} />
+            <BuyButton
+              initialCartItemId={
+                cart.find((item) => item.product.id === good.id)?.id ?? 0
+              }
+              productId={good.id}
+              isInCart={[...cart].some((item) => item.product.id === good.id)}
+            />
             <S.FavoriteButton>
               <Heart stroke="#005BFF" size={20} />
             </S.FavoriteButton>

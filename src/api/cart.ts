@@ -35,14 +35,14 @@ const Cart = {
     return { cart, totalPrice, totalSales };
   },
 
-  async addItem(id: number): Promise<boolean> {
+  async addItem(id: number): Promise<ICartItem> {
     try {
       const res = await $api.post(`/users/cart`, { productId: id });
 
       if (res.status !== 200)
         throw new Error("Ошибка добавления товара в корзину");
 
-      return true;
+      return res.data;
     } catch (error) {
       throw new Error("Ошибка добавления товара в корзину");
     }

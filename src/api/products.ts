@@ -15,17 +15,13 @@ export interface IGood {
 const Goods = {
   async getOne(id: string): Promise<IGood> {
     const res = await $api.get(`/products/${id}`);
-    if (res.status !== 200) {
-      throw new Error("Ошибка получения товара");
-    }
+    if (res.status !== 200) throw new Error("Ошибка получения товара");
     return res.data;
   },
 
   async get(): Promise<IGood[]> {
     const res = await $api.get("/products");
-    if (res.status !== 200) {
-      throw new Error("Ошибка получения товара");
-    }
+    if (res.status !== 200) throw new Error("Ошибка получения товара");
     return res.data;
   },
 };

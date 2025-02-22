@@ -2,31 +2,44 @@
 
 import { FC, useState } from "react";
 import { StyledBuyButton } from "../styled";
-import $api from "@api";
+import Cart from "@api/cart";
+import { useAuthStore } from "@stores/auth.store";
+import { useRouter } from "next/navigation";
 
 interface Props {
   productId: number;
+  initialCartItemId: number;
   isInCart: boolean;
 }
 
-const BuyButton: FC<Props> = ({ productId, isInCart }) => {
+const BuyButton: FC<Props> = ({ productId, initialCartItemId, isInCart }) => {
+  const router = useRouter();
+  const isAuth = useAuthStore((state) => state.isAuth);
   const [added, setAdded] = useState(isInCart);
+  const [cartItemId, setCartItemId] = useState(initialCartItemId);
 
   const handleClick = async () => {
     try {
+      if (!isAuth) {
+        router.push("/login");
+        return;
+      }
+      if (added) {
+        await Cart.deleteItem(cartItemId);
+        setAdded(false);
+        setCartItemId(0);
+        return;
+      }
+      const newItem = await Cart.addItem(productId);
       setAdded(true);
-      await $api.post(
-        "/users/cart",
-        { productId },
-        { headers: { "Content-Type": "application/json" } }
-      );
+      setCartItemId(newItem.id);
     } catch (error) {
       setAdded(false);
     }
   };
 
   return (
-    <StyledBuyButton $inCart={added} onClick={handleClick} disabled={added}>
+    <StyledBuyButton $inCart={added} onClick={handleClick}>
       {added ? "Добавлено" : "Добавить в корзину"}
     </StyledBuyButton>
   );

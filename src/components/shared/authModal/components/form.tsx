@@ -3,26 +3,28 @@
 import React, { FormEvent, useState } from "react";
 import * as S from "../styled";
 import { Inputs, ModalButton } from ".";
-import $api from "@api";
 import { AxiosError } from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@stores/auth.store";
+import User from "@api/user";
+import { useAuthContextValue } from "../hooks/useAuthContextValue";
 
 export const Form = () => {
   const [isPending, setIsPending] = useState(false);
   const setIsAuth = useAuthStore((state) => state.setIsAuth);
+  const { authType } = useAuthContextValue();
   const router = useRouter();
+
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       setIsPending(true);
-      const data = new FormData(e.currentTarget);
-      await $api.post("/users/login", Object.fromEntries(data));
-      router.back();
-      toast.success("Вы успешно вошли в аккаунт");
+      if (authType === "register") await User.register(e.currentTarget);
+      else await User.login(e.currentTarget);
       setIsAuth(true);
-      setIsPending(false);
+      toast.success("Вы успешно вошли в аккаунт");
+      router.refresh();
     } catch (err) {
       if (err instanceof AxiosError) toast.error(err.response?.data?.error);
     } finally {

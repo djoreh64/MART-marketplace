@@ -22,18 +22,17 @@ const Header: FC = () => {
   const setIsAuth = useAuthStore((state) => state.setIsAuth);
 
   useEffect(() => {
-    if (isAuth) return;
     const checkAuth = async () => {
       try {
-        await $api.get("/users/me");
-        setIsAuth(true);
+        const res = await $api.get("/users/me");
+        if (res.data) setIsAuth(true);
       } catch {
         setIsAuth(false);
       }
     };
 
-    checkAuth();
-  }, [isAuth, router]);
+    if (!isAuth) checkAuth();
+  }, [isAuth]);
 
   useEffect(() => {
     setIsMobileScreen(isMobile);
@@ -79,13 +78,19 @@ const Header: FC = () => {
         </S.SearchInputHolder>
         <S.NavbarList>
           {navbarListItems.map(({ src, href, text }) => (
-            <S.NavbarListLink $active={pathname === href} href={href} key={src}>
+            <S.NavbarListLink
+              $cart={src !== "cart"}
+              data-count={"3"}
+              $active={pathname === href}
+              href={href}
+              key={src}
+            >
               <NavbarIcon src={src} />
               <S.NavbarListText>{text}</S.NavbarListText>
             </S.NavbarListLink>
           ))}
         </S.NavbarList>
-        {<LoginButton />}
+        <LoginButton />
       </S.Navbar>
     </S.Container>
   );

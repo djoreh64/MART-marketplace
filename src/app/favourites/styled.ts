@@ -141,3 +141,44 @@ export const Headline = styled.h1`
     font-size: 24px;
   }
 `;
+
+export const EmptyContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 520px;
+  margin: 0 auto;
+  min-height: 80vh;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`;
+
+export const EmptyHeadline = styled.h3`
+  margin: 0;
+  font-size: 32px;
+  font-weight: 600;
+  margin-top: 12px;
+`;
+
+export const EmptyButton = styled(Button)`
+  border-radius: 12px;
+  font-size: 18px;
+  margin-top: 12px;
+  padding: 12px 24px;
+  & a {
+    text-decoration: none;
+    color: ${({ theme }) => theme.colors.base};
+  }
+`;
+
+export const EmptyDescription = styled.p`
+  margin: 0;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 400;
+  color: ${({ theme }) => theme.colors.textLight};
+`;
