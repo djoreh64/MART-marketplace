@@ -9,12 +9,31 @@ import { FC, useEffect, useState } from "react";
 import { navbarListItems, navbarListItemsMobile } from "./data";
 import * as S from "./styled";
 import { LoginButton, NavbarIcon } from "./components";
+import { useAuthStore } from "@stores/auth.store";
+import $api from "@api";
 
 const Header: FC = () => {
-  const [isMobileScreen, setIsMobileScreen] = useState(false);
   const { isMobile } = useScreenSize();
+  const [isMobileScreen, setIsMobileScreen] = useState(isMobile);
   const pathname = usePathname();
   const router = useRouter();
+
+  const isAuth = useAuthStore((state) => state.isAuth);
+  const setIsAuth = useAuthStore((state) => state.setIsAuth);
+
+  useEffect(() => {
+    if (isAuth) return;
+    const checkAuth = async () => {
+      try {
+        await $api.get("/users/me");
+        setIsAuth(true);
+      } catch {
+        setIsAuth(false);
+      }
+    };
+
+    checkAuth();
+  }, [isAuth, router]);
 
   useEffect(() => {
     setIsMobileScreen(isMobile);
@@ -66,7 +85,7 @@ const Header: FC = () => {
             </S.NavbarListLink>
           ))}
         </S.NavbarList>
-        <LoginButton>Войти</LoginButton>
+        {<LoginButton />}
       </S.Navbar>
     </S.Container>
   );

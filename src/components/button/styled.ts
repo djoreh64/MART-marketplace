@@ -29,6 +29,9 @@ export const StyledButton = styled.button<{
   &:active {
     scale: 0.95;
   }
+  &:disabled {
+    pointer-events: none;
+  }
 `;
 
 export const LoaderWrapper = styled.div`
@@ -38,10 +41,10 @@ export const LoaderWrapper = styled.div`
   width: 100%;
 `;
 
-export const Loader = styled.span`
+export const Loader = styled.span<{ $dark?: boolean }>`
   width: 48px;
   height: 48px;
-  background: #fff;
+  background: ${({ $dark, theme }) => (!$dark ? "#fff" : theme.colors.primary)};
   display: inline-block;
   border-radius: 50%;
   box-sizing: border-box;

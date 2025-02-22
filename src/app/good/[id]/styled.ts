@@ -204,7 +204,7 @@ export const Buttons = styled.div`
   }
 `;
 
-export const BuyButton = styled(Button)<{ $inCart: boolean }>`
+export const StyledBuyButton = styled(Button)<{ $inCart: boolean }>`
   justify-content: center;
   font-size: 14px;
   flex: 1;

@@ -14,7 +14,7 @@ const GlobalStyle = createGlobalStyle`
         (font) => `
         @font-face {
           font-family: "TTFirsNeue";
-          src: url("https://cdn.djoreh64.ru/fonts/${font.fileName}.woff2") format("woff2");
+          src: url("${process.env.NEXT_PUBLIC_FONTS}/${font.fileName}.woff2") format("woff2");
           font-weight: ${font.fontWeight};
           font-style: normal;
         }
@@ -46,8 +46,13 @@ const GlobalStyle = createGlobalStyle`
     body {
       margin: 0;
       padding: 0;
+      color: ${({ theme }) => theme.colors.text};
       background-color: ${({ theme }) => theme.colors.bg};
       font-family: "TT Firs Neue", sans-serif;
+
+      @media (prefers-color-scheme: dark) {
+        color: ${({ theme }) => theme.colors.text} !important;
+      }
     }
 
     button, a {

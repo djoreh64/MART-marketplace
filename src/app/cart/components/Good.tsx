@@ -1,37 +1,38 @@
 "use client";
 
-import React, { FC, useState } from "react";
-import ActionsItemIcon from "./actionsItemIcon";
+import React, { FC } from "react";
 import { Minus, Plus } from "lucide-react";
 import * as S from "../styled";
+import ActionsItemIcon from "./actionsItemIcon";
+import { ICartItem } from "@api/cart";
+import { useCart } from "../hooks/useCart";
 
 interface Props {
-  name: string;
-  price: number;
-  oldPrice: number;
-  image: string;
+  cartItem: ICartItem;
 }
 
-const Good: FC<Props> = ({ name, price, oldPrice, image }) => {
-  const [goodQuantity, setGoodQuantity] = useState(1);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setGoodQuantity(Number(e.target.value));
-  const handleBlur = () => goodQuantity < 1 && setGoodQuantity(1);
-  const increaseQuantity = () => setGoodQuantity(goodQuantity + 1);
-  const decreaseQuantity = () => setGoodQuantity(goodQuantity - 1);
+const Good: FC<Props> = ({ cartItem }) => {
+  const { imageUrl, name, originalPrice, price } = cartItem.product;
+  const {
+    deleteCartItem,
+    handleDecrease,
+    handleIncrease,
+    handleChange,
+    handleBlur,
+    quantity,
+  } = useCart(cartItem);
 
   return (
     <S.Good>
       <S.GoodMain>
-        <S.GoodImage src={image} alt={name} width={77} height={70} />
+        <S.GoodImage src={imageUrl} alt={name} width={77} height={70} />
         <S.GoodInfo>
           <S.GoodName>{name}</S.GoodName>
           <S.GoodActions>
             <S.GoodActionsItem>
               <ActionsItemIcon type="favourite" />
             </S.GoodActionsItem>
-            <S.GoodActionsItem>
+            <S.GoodActionsItem onClick={deleteCartItem}>
               <ActionsItemIcon type="delete" />
             </S.GoodActionsItem>
           </S.GoodActions>
@@ -39,26 +40,25 @@ const Good: FC<Props> = ({ name, price, oldPrice, image }) => {
       </S.GoodMain>
       <S.GoodPriceHolder>
         <S.GoodPrice>{price}₽</S.GoodPrice>
-        <S.GoodOldPrice>{oldPrice}₽ без скидки</S.GoodOldPrice>
+        <S.GoodOldPrice>{originalPrice}₽ без скидки</S.GoodOldPrice>
       </S.GoodPriceHolder>
       <S.GoodQuantity>
         <S.GoodQuantityButtons>
           <S.GoodQuantityButton
-            onClick={decreaseQuantity}
-            disabled={goodQuantity === 1}
+            onClick={handleDecrease}
+            disabled={quantity === 1}
           >
             <Minus width={20} height={20} />
           </S.GoodQuantityButton>
           <S.GoodQuantityInputHolder>
             <S.GoodQuantityInput
-              min={1}
-              value={goodQuantity || ""}
-              type="number"
               onChange={handleChange}
               onBlur={handleBlur}
+              value={quantity || ""}
+              type="number"
             />
           </S.GoodQuantityInputHolder>
-          <S.GoodQuantityButton onClick={increaseQuantity}>
+          <S.GoodQuantityButton onClick={handleIncrease}>
             <Plus />
           </S.GoodQuantityButton>
         </S.GoodQuantityButtons>

@@ -1,21 +1,55 @@
 "use client";
 
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import * as S from "./styled";
-import Good from "./components/Good";
+import Good from "./components/good";
 import Image from "next/image";
 import Link from "next/link";
-import toast from "react-hot-toast";
+import CartController from "@api/cart";
+import { useCartStore } from "@stores/cart.store";
+import { Loader, LoaderWrapper } from "@components/button/styled";
 
 const Cart: FC = () => {
-  const [isCartEmpty, setIsCartEmpty] = useState(false);
+  const [loading, setLoading] = useState(true);
+  
+  const setCart = useCartStore((state) => state.setCart);
+  const cart = useCartStore((state) => state.cartItems);
+  const totalPrice = useCartStore((state) => state.totalPrice);
+  const totalSales = useCartStore((state) => state.totalSales);
+  const recalculateTotals = useCartStore((state) => state.recalculateTotals);
 
-  const handleBuy = () => {
-    setIsCartEmpty(true);
-    toast.success("Заказ успешно оформлен");
+
+  const getCart = async () => {
+    try {
+      const { cart } = await CartController.get();
+      recalculateTotals(cart);
+      setCart(cart);
+    } catch (error) {
+      console.error("Ошибка при получении корзины:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  if (isCartEmpty) {
+  useEffect(() => {
+    getCart();
+  }, []);
+
+  if (loading) {
+    return (
+      <S.EmptyContent>
+        <S.EmptyHeadline>
+          <LoaderWrapper>
+            <Loader $dark />
+          </LoaderWrapper>
+        </S.EmptyHeadline>
+      </S.EmptyContent>
+    );
+  }
+
+  const length = cart.length;
+
+  if (length === 0) {
     return (
       <S.EmptyContent>
         <Image
@@ -41,27 +75,26 @@ const Cart: FC = () => {
       <S.Container>
         <S.Block>
           <S.Delivery>Доставка Ozon</S.Delivery>
-          <Good
-            image="/flower.jpg"
-            name="Комнатный цветок"
-            price={499}
-            oldPrice={1200}
-          />
+          {cart.map((item) => (
+            <Good key={item.id} cartItem={item} />
+          ))}
         </S.Block>
         <S.Block>
-          <S.BuyButton onClick={handleBuy}>Оформить заказ</S.BuyButton>
+          <S.BuyButton>Оформить заказ</S.BuyButton>
           <S.BuyBlock>
             <S.BuyHeader>
               <S.BuyHeaderTitle>Ваша корзина</S.BuyHeaderTitle>
-              <S.BuyHeaderText>9 товаров</S.BuyHeaderText>
+              <S.BuyHeaderText>{length} товаров</S.BuyHeaderText>
             </S.BuyHeader>
             <S.BuyBlockItem>
-              <S.BuyBlockItemTitle>Товары (9)</S.BuyBlockItemTitle>
-              <S.BuyBlockItemText>4491₽</S.BuyBlockItemText>
+              <S.BuyBlockItemTitle>Товары ({length})</S.BuyBlockItemTitle>
+              <S.BuyBlockItemText>{totalPrice}₽</S.BuyBlockItemText>
             </S.BuyBlockItem>
             <S.BuyBlockItem>
               <S.BuyBlockItemTitle>Скидка</S.BuyBlockItemTitle>
-              <S.BuyBlockItemText $sale>- 4500₽</S.BuyBlockItemText>
+              <S.BuyBlockItemText $sale>
+                -{Math.abs(totalSales)}₽
+              </S.BuyBlockItemText>
             </S.BuyBlockItem>
           </S.BuyBlock>
         </S.Block>

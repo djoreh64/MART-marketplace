@@ -1,18 +1,34 @@
 "use client";
 
-import React, { FC, useState } from "react";
-import * as S from "../styled";
+import { FC, useState } from "react";
+import { StyledBuyButton } from "../styled";
+import $api from "@api";
 
-const BuyButton: FC = () => {
-  const [inCart, setInCart] = useState(false);
+interface Props {
+  productId: number;
+  isInCart: boolean;
+}
+
+const BuyButton: FC<Props> = ({ productId, isInCart }) => {
+  const [added, setAdded] = useState(isInCart);
+
+  const handleClick = async () => {
+    try {
+      setAdded(true);
+      await $api.post(
+        "/users/cart",
+        { productId },
+        { headers: { "Content-Type": "application/json" } }
+      );
+    } catch (error) {
+      setAdded(false);
+    }
+  };
+
   return (
-    <S.BuyButton
-      onClick={() => setInCart(true)}
-      $inCart={inCart}
-      primary={inCart}
-    >
-      {inCart ? "В корзине" : "Добавить в корзину"}
-    </S.BuyButton>
+    <StyledBuyButton $inCart={added} onClick={handleClick} disabled={added}>
+      {added ? "Добавлено" : "Добавить в корзину"}
+    </StyledBuyButton>
   );
 };
 
