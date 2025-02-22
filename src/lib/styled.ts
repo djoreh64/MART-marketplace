@@ -1,27 +1,27 @@
 import styled, { createGlobalStyle } from "styled-components";
 
-const fontFaces = [
-  { fileName: "TTFirsNeue-Regular", fontWeight: 400 },
-  { fileName: "TTFirsNeue-Medium", fontWeight: 500 },
-  { fileName: "TTFirsNeue-Bold", fontWeight: 600 },
-  { fileName: "TTFirsNeue-ExtraBold", fontWeight: 700 },
-  { fileName: "TTFirsNeue-Black", fontWeight: 800 },
-];
-
 const GlobalStyle = createGlobalStyle`
-    ${fontFaces
-      .map(
-        (font) => `
-        @font-face {
-          font-family: "TTFirsNeue";
-          src: url("${process.env.NEXT_PUBLIC_FONTS}/${font.fileName}.woff2") format("woff2");
-          font-weight: ${font.fontWeight};
-          font-style: normal;
-        }
-      `
-      )
-      .join("")}
-    
+    @font-face {
+    font-family: "TTFirsNeue";
+    src: url("https://djoreh64.ru/fonts/TTFirsNeue-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    }
+
+    @font-face {
+      font-family: "TTFirsNeue";
+      src: url("https://djoreh64.ru/fonts/TTFirsNeue-Medium.woff2") format("woff2");
+      font-weight: 500;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: "TTFirsNeue";
+      src: url("https://djoreh64.ru/fonts/TTFirsNeue-Bold.woff2") format("woff2");
+      font-weight: 600;
+      font-style: normal;
+    }
+
     * {
       box-sizing: border-box;
     }
@@ -48,7 +48,7 @@ const GlobalStyle = createGlobalStyle`
       padding: 0;
       color: ${({ theme }) => theme.colors.text};
       background-color: ${({ theme }) => theme.colors.bg};
-      font-family: "TT Firs Neue", sans-serif;
+      font-family: "TTFirsNeue", sans-serif;
 
       @media (prefers-color-scheme: dark) {
         color: ${({ theme }) => theme.colors.text} !important;
@@ -93,7 +93,7 @@ const lightTheme = {
     bg: "#f8f9fa",
   },
   fonts: {
-    main: "TT Firs Neue, sans-serif",
+    main: "TTFirsNeue, sans-serif",
   },
 };
 
