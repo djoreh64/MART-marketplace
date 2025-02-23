@@ -7,7 +7,7 @@ interface IError {
   reset: () => void;
 }
 
-const HomeError = ({ reset }: IError) => {
+const FavouritesError = ({ reset }: IError) => {
   return (
     <ErrorPage>
       <h2>Что-то пошло не так. Попробуйте позже</h2>
@@ -18,4 +18,4 @@ const HomeError = ({ reset }: IError) => {
   );
 };
 
-export default HomeError;
+export default FavouritesError;

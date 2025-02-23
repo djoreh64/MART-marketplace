@@ -22,7 +22,7 @@ const Cart: FC = () => {
 
   const getCart = async () => {
     try {
-      const { cart } = await CartController.get();
+      const cart = await CartController.get();
       recalculateTotals(cart);
       setCart(cart);
     } catch {

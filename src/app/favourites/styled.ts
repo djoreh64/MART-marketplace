@@ -20,7 +20,6 @@ export const Content = styled.div`
 export const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(2, 1fr);
   gap: 21px;
 
   @media screen and (max-width: 1440px) {
@@ -41,6 +40,7 @@ export const Card = styled(Link)`
   overflow: hidden;
   border: 1px solid ${({ theme }) => theme.colors.textLighter};
   border-radius: 18px;
+  height: 300px;
   text-decoration: none;
   color: ${({ theme }) => theme.colors.text};
   background-color: ${({ theme }) => theme.colors.grayDark};

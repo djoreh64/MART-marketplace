@@ -12,7 +12,7 @@ interface Props {
   isInCart: boolean;
 }
 
-const BuyButton: FC<Props> = ({ productId, initialCartItemId, isInCart }) => {
+const BuyButton: FC<Props> = ({ productId, isInCart, initialCartItemId }) => {
   const router = useRouter();
   const isAuth = useAuthStore((state) => state.isAuth);
   const [added, setAdded] = useState(isInCart);

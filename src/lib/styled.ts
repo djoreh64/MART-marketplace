@@ -111,7 +111,7 @@ const lightTheme = {
 //     bg: "#2D2D2D",
 //   },
 //   fonts: {
-//     main: "TT Firs Neue, sans-serif",
+//     main: "TTFirsNeue, sans-serif",
 //   },
 // };
 

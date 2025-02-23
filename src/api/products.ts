@@ -10,6 +10,10 @@ export interface IGood {
   material: string;
   country: string;
   description: string;
+  isInCart: boolean;
+  isInFavourites: boolean;
+  cartItemId: number;
+  favoriteItemId: number;
 }
 
 const Goods = {
