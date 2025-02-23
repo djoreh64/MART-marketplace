@@ -7,6 +7,8 @@ export interface ICartItem {
   id: number;
   product: TCartGood;
   quantity: number;
+  favouriteItemId: number;
+  isInFavourites: boolean;
 }
 
 export interface ICart {
