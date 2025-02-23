@@ -17,11 +17,11 @@ export const metadata: Metadata = {
     title: "Главная | OZON",
     description:
       "OZON - крупнейший онлайн-магазин, предлагающий товары для всех категорий покупателей. Отличные предложения и скидки!",
-    url: "https://ozon.ru",
+    url: "https://djoreh64.ru",
     siteName: "OZON",
     images: [
       {
-        url: "https://djoreh64.ru/logo.jpg",
+        url: "https://djoreh64.ru/images/logo.jpg",
         width: 1200,
         height: 630,
         alt: "OZON - Онлайн магазин",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     title: "Главная | OZON",
     description:
       "OZON - крупнейший онлайн-магазин, предлагающий товары для всех категорий покупателей. Отличные предложения и скидки!",
-    images: ["https://ozon.ru/default-image.jpg"],
+    images: ["https://djoreh64.ru/images/logo.jpg"],
     creator: "@Ozon",
   },
   robots: "index, follow",
