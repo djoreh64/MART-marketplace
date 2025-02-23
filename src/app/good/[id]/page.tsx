@@ -16,12 +16,38 @@ export async function generateMetadata({
   try {
     const id = (await params).id;
     const product = await Goods.getOne(id);
+    const productImage = product.imageUrl || ""; 
+
     return {
       title: `${product.name} | OZON`,
+      description: product.description || "Описание товара от OZON",
+      openGraph: {
+        title: `${product.name} | OZON`,
+        description: product.description || "Описание товара от OZON",
+        url: `https://ozon.ru/product/${id}`,
+        siteName: "OZON",
+        images: [
+          {
+            url: productImage,
+            width: 800,
+            height: 600,
+            alt: product.name,
+          },
+        ],
+        type: "website",
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: `${product.name} | OZON`,
+        description: product.description || "Описание товара от OZON",
+        images: [productImage], 
+        creator: "@Ozon",
+      },
     };
   } catch (error) {
     return {
       title: "Ошибка загрузки товара",
+      description: "Не удалось загрузить данные товара",
     };
   }
 }
