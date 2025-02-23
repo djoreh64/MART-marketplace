@@ -2,6 +2,7 @@
 
 import Button from "@components/button";
 import Input from "@components/input";
+import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
 
@@ -152,7 +153,7 @@ export const NavbarList = styled.ul`
   padding-left: 0;
 `;
 
-export const NavbarIcon = styled.img`
+export const NavbarIcon = styled(Image)`
   transition: 0.1s ease-out;
 `;
 

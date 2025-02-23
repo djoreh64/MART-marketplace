@@ -9,14 +9,14 @@ const Favourites: FC = () => {
     return (
       <S.EmptyContent>
         <Image
-          src={`${process.env.NEXT_PUBLIC_CDN_PATH}/cart/box.png`}
+          src={`${process.env.NEXT_PUBLIC_CDN_PATH}/favourites.svg`}
           alt="empty"
-          width={214}
+          width={128}
           height={128}
         />
-        <S.EmptyHeadline>Корзина пуста</S.EmptyHeadline>
+        <S.EmptyHeadline>Список избранного пуст</S.EmptyHeadline>
         <S.EmptyDescription>
-          Добавьте понравившиеся товары в корзину на главной странице
+          Добавьте понравившиеся товары в избранное на странице товара
         </S.EmptyDescription>
         <S.EmptyButton primary>
           <Link href="/">К покупкам</Link>

@@ -24,6 +24,7 @@ export const Form = () => {
       else await User.login(e.currentTarget);
       setIsAuth(true);
       toast.success("Вы успешно вошли в аккаунт");
+      router.push("/")
       router.refresh();
     } catch (err) {
       if (err instanceof AxiosError) toast.error(err.response?.data?.error);

@@ -9,6 +9,7 @@ export const Content = styled.div`
   flex-direction: column;
   gap: 32px;
   margin-top: 26px;
+  padding-bottom: 80px;
 
   @media (max-width: 768px) {
     gap: 16px;
@@ -344,6 +345,10 @@ export const EmptyHeadline = styled.h3`
   font-size: 32px;
   font-weight: 600;
   margin-top: 12px;
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+  }
 `;
 
 export const EmptyButton = styled(Button)`
@@ -355,6 +360,10 @@ export const EmptyButton = styled(Button)`
     text-decoration: none;
     color: ${({ theme }) => theme.colors.base};
   }
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 export const EmptyDescription = styled.p`
@@ -363,4 +372,8 @@ export const EmptyDescription = styled.p`
   font-size: 24px;
   font-weight: 400;
   color: ${({ theme }) => theme.colors.textLight};
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
 `;
