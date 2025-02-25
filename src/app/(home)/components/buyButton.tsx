@@ -10,15 +10,24 @@ import Cart from "@api/cart";
 interface Props {
   productId: number;
   isInCart: boolean;
+  cartItemId: number;
 }
 
-const BuyButton: FC<Props> = ({ productId, isInCart }) => {
+const BuyButton: FC<Props> = ({ productId, isInCart, cartItemId }) => {
   const [inCart, setInCart] = useState(isInCart);
+  const [itemId, setItemId] = useState(cartItemId);
   const isAuth = useAuthStore((state) => state.isAuth);
   const router = useRouter();
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    if (inCart) {
+      setInCart(false);
+      await Cart.deleteItem(itemId);
+      setItemId(0);
+      return;
+    }
+
     setInCart(true);
 
     if (!isAuth) {
@@ -27,11 +36,12 @@ const BuyButton: FC<Props> = ({ productId, isInCart }) => {
       return;
     }
 
-    await Cart.addItem(productId);
+    const { id } = await Cart.addItem(productId);
+    setItemId(id);
   };
 
   return (
-    <S.CardButton onClick={handleClick} disabled={inCart} primary={!inCart}>
+    <S.CardButton onClick={handleClick} primary={!inCart}>
       <ShoppingCart
         size={20}
         strokeWidth={1.5}

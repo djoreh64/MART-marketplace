@@ -139,6 +139,10 @@ export const CardText = styled.div`
 export const CardTitle = styled.h3`
   margin: 0;
   font-size: 14px;
+  height: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   font-weight: 500;
   text-decoration: none;
   color: inherit;
