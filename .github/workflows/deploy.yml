@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '22'  
+          node-version: '22'
 
       - name: Install dependencies
         run: yarn install
@@ -39,8 +39,11 @@ jobs:
           echo "Starting SSH deployment..."
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa djoreh64@130.193.43.189 << 'EOF'
             cd /var/www/html/diplomaFrontend
-            yarn install   
-            yarn build   
-            sudo npm install -g pm2  
-            pm2 restart next-app   
+            git fetch --all
+            git checkout main
+            git pull origin main
+            yarn install
+            yarn build
+            yarn global add pm2
+            pm2 restart next-app || pm2 start npm --name next-app -- start
           EOF
