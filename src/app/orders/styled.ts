@@ -71,6 +71,7 @@ export const Delivery = styled.div`
   margin: 0;
   font-size: 18px;
   font-weight: 500;
+  width: 100%;
   border-radius: 12px;
   background-color: #f5f7fa;
   padding: 18px;

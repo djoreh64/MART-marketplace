@@ -59,6 +59,12 @@ const GlobalStyle = createGlobalStyle`
       -webkit-tap-highlight-color: transparent
     }
 
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0; 
+    }
+
     img {
       pointer-events: none
     }
