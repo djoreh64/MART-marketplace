@@ -50,9 +50,10 @@ export const Orders = styled.div`
   }
 `;
 
-export const Block = styled.div`
+export const Block = styled.div<{ $empty?: boolean }>`
   display: flex;
   flex-direction: column;
+  align-items: ${({ $empty }) => ($empty ? "center" : "flex-start")};
   gap: 18px;
   height: fit-content;
   padding: 24px;
@@ -321,7 +322,7 @@ export const UserName = styled.h2`
 export const UserBalance = styled.h3`
   margin: 0;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 500;
   color: ${({ theme }) => theme.colors.textLight};
 `;
 

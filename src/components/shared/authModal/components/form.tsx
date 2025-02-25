@@ -13,6 +13,7 @@ import { useAuthContextValue } from "../hooks/useAuthContextValue";
 export const Form = () => {
   const [isPending, setIsPending] = useState(false);
   const setIsAuth = useAuthStore((state) => state.setIsAuth);
+  const setUser = useAuthStore((state) => state.setUser);
   const { authType } = useAuthContextValue();
   const router = useRouter();
 
@@ -22,9 +23,11 @@ export const Form = () => {
       setIsPending(true);
       if (authType === "register") await User.register(e.currentTarget);
       else await User.login(e.currentTarget);
+      const user = await User.me();
+      setUser(user);
       setIsAuth(true);
       toast.success("Вы успешно вошли в аккаунт");
-      router.push("/")
+      router.push("/");
       router.refresh();
     } catch (err) {
       if (err instanceof AxiosError) toast.error(err.response?.data?.error);

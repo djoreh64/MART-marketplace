@@ -48,21 +48,39 @@ const Orders: FC = () => {
 
   if (orders.length === 0) {
     return (
-      <S.EmptyContent>
-        <Image
-          src={`${process.env.NEXT_PUBLIC_CDN_PATH}/cart/box.png`}
-          alt="empty"
-          width={214}
-          height={128}
-        />
-        <S.EmptyHeadline>Список заказов пуст</S.EmptyHeadline>
-        <S.EmptyDescription>
-          Закажите понравившийся товар, добавленный в корзину
-        </S.EmptyDescription>
-        <S.EmptyButton primary>
-          <Link href="/">К покупкам</Link>
-        </S.EmptyButton>
-      </S.EmptyContent>
+      <S.Content>
+        <S.Container>
+          <S.Block>
+            <Image
+              src={`${process.env.NEXT_PUBLIC_CDN_PATH}/profile.svg`}
+              alt="Фото профиля"
+              width={163}
+              height={163}
+            />
+            <S.UserInfo>
+              <S.UserName>
+                {user?.firstName} {user?.lastName}
+              </S.UserName>
+              <S.UserBalance>Баланс: {user?.balance}₽</S.UserBalance>
+            </S.UserInfo>
+          </S.Block>
+          <S.Block $empty>
+            <Image
+              src={`${process.env.NEXT_PUBLIC_CDN_PATH}/cart/box.png`}
+              alt="empty"
+              width={214}
+              height={128}
+            />
+            <S.EmptyHeadline>Список заказов пуст</S.EmptyHeadline>
+            <S.EmptyDescription>
+              Закажите понравившийся товар, добавленный в корзину
+            </S.EmptyDescription>
+            <S.EmptyButton primary>
+              <Link href="/">К покупкам</Link>
+            </S.EmptyButton>
+          </S.Block>
+        </S.Container>
+      </S.Content>
     );
   }
 
@@ -79,22 +97,24 @@ const Orders: FC = () => {
           />
           <S.UserInfo>
             <S.UserName>
-              {user.firstName} {user.lastName}
+              {user?.firstName} {user?.lastName}
             </S.UserName>
-            <S.UserBalance>Баланс: {user.balance}₽</S.UserBalance>
+            <S.UserBalance>Баланс: {user?.balance}₽</S.UserBalance>
           </S.UserInfo>
         </S.Block>
         <S.Orders>
-          {orders.map(({ id, orderItems, createdAt, totalAmount }) => (
-            <S.Block key={id}>
-              <S.Delivery>
-                Заказ от {formatDate(createdAt)} на {totalAmount}₽
-              </S.Delivery>
-              {orderItems.map(({ product, quantity }) => (
-                <Good key={product.id} good={product} quantity={quantity} />
-              ))}
-            </S.Block>
-          ))}
+          {[...orders]
+            .reverse()
+            .map(({ id, orderItems, createdAt, totalAmount }) => (
+              <S.Block key={id}>
+                <S.Delivery>
+                  Заказ от {formatDate(createdAt)} на {totalAmount}₽
+                </S.Delivery>
+                {orderItems.map(({ product, quantity }) => (
+                  <Good key={product.id} good={product} quantity={quantity} />
+                ))}
+              </S.Block>
+            ))}
         </S.Orders>
       </S.Container>
     </S.Content>
