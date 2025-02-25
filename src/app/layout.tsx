@@ -30,27 +30,29 @@ export const metadata: Metadata = {
 const RootLayout = ({
   children,
   auth,
-}: Readonly<PropsWithChildren & { auth: React.ReactNode }>) => (
-  <html lang="ru">
-    <body>
-      <StyledComponentsRegistry>
-        <Toaster
-          containerStyle={{ bottom: 80 }}
-          toastOptions={{
-            duration: 2000,
-            style: {
-              fontFamily: "TTFirsNeue, sans-serif",
-            },
-            position: "bottom-center",
-          }}
-        />
-        <MainLayout>
-          {auth}
-          {children}
-        </MainLayout>
-      </StyledComponentsRegistry>
-    </body>
-  </html>
-);
+}: Readonly<PropsWithChildren & { auth: React.ReactNode }>) => {
+  return (
+    <html lang="ru">
+      <body>
+        <StyledComponentsRegistry>
+          <Toaster
+            containerStyle={{ bottom: 80 }}
+            toastOptions={{
+              duration: 2000,
+              style: {
+                fontFamily: "TTFirsNeue, sans-serif",
+              },
+              position: "bottom-center",
+            }}
+          />
+          <MainLayout>
+            {auth}
+            {children}
+          </MainLayout>
+        </StyledComponentsRegistry>
+      </body>
+    </html>
+  );
+};
 
 export default RootLayout;

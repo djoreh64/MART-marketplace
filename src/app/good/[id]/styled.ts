@@ -31,7 +31,7 @@ export const ImageHolder = styled.div`
   }
 
   @media (max-width: 768px) {
-    height: 300px;
+    height: 400px;
     padding: 12px;
     background-color: ${(props) => props.theme.colors.base};
     img {

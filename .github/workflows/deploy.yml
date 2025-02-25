@@ -1,0 +1,46 @@
+name: Deploy Next.js project
+
+on:
+  push:
+    branches:
+      - main  
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '22'  
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build project
+        run: yarn build
+
+      - name: Setup SSH and deploy
+        run: |
+          echo "Starting SSH setup..."
+          mkdir -p ~/.ssh
+          
+          echo "Saving private key..."
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+          echo "Testing ssh-keyscan for host: 130.193.43.189"
+          ssh-keyscan -t rsa 130.193.43.189 >> ~/.ssh/known_hosts
+
+          echo "Starting SSH deployment..."
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa djoreh64@130.193.43.189 << 'EOF'
+            cd /var/www/html/diplomaFrontend
+            yarn install   
+            yarn build   
+            sudo npm install -g pm2  
+            pm2 restart next-app   
+          EOF
