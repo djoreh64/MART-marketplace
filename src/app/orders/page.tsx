@@ -97,22 +97,24 @@ const Orders: FC = () => {
           />
           <S.UserInfo>
             <S.UserName>
-              {user.firstName} {user.lastName}
+              {user?.firstName} {user?.lastName}
             </S.UserName>
-            <S.UserBalance>Баланс: {user.balance}₽</S.UserBalance>
+            <S.UserBalance>Баланс: {user?.balance}₽</S.UserBalance>
           </S.UserInfo>
         </S.Block>
         <S.Orders>
-          {orders.map(({ id, orderItems, createdAt, totalAmount }) => (
-            <S.Block key={id}>
-              <S.Delivery>
-                Заказ от {formatDate(createdAt)} на {totalAmount}₽
-              </S.Delivery>
-              {orderItems.map(({ product, quantity }) => (
-                <Good key={product.id} good={product} quantity={quantity} />
-              ))}
-            </S.Block>
-          ))}
+          {[...orders]
+            .reverse()
+            .map(({ id, orderItems, createdAt, totalAmount }) => (
+              <S.Block key={id}>
+                <S.Delivery>
+                  Заказ от {formatDate(createdAt)} на {totalAmount}₽
+                </S.Delivery>
+                {orderItems.map(({ product, quantity }) => (
+                  <Good key={product.id} good={product} quantity={quantity} />
+                ))}
+              </S.Block>
+            ))}
         </S.Orders>
       </S.Container>
     </S.Content>
