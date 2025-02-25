@@ -8,7 +8,7 @@ import { serverFetch } from "@utils/serverFetch";
 
 const Home: FC = async () => {
   const goods: IGood[] = await serverFetch("/products");
-  
+
   return (
     <S.Content>
       <Banner />
