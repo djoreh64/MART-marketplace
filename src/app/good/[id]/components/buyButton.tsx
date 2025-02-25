@@ -30,9 +30,9 @@ const BuyButton: FC<Props> = ({ productId, isInCart, initialCartItemId }) => {
         setCartItemId(0);
         return;
       }
-      const newItem = await Cart.addItem(productId);
+      const { id } = await Cart.addItem(productId);
       setAdded(true);
-      setCartItemId(newItem.id);
+      setCartItemId(id);
     } catch (error) {
       setAdded(false);
     }

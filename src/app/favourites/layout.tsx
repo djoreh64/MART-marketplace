@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { FC, PropsWithChildren } from "react";
 
-export const generateMetadata = (): Metadata => ({
+export const metadata: Metadata = {
   title: "Избранное | OZON",
   description:
     "Ваши избранные товары на OZON. Сохраняйте понравившиеся товары и возвращайтесь к ним в любое время.",
@@ -26,7 +26,7 @@ export const generateMetadata = (): Metadata => ({
     description: "Ваши избранные товары на OZON.",
     images: ["https://djoreh64.ru/images/favourites-preview.jpg"],
   },
-});
+};
 
 const Layout: FC<PropsWithChildren> = ({ children }) => {
   return <main>{children}</main>;

@@ -1,47 +1,30 @@
-import { Metadata } from "next";
 import MainLayout from "@layouts/mainLayout";
 import StyledComponentsRegistry from "@lib/registry";
+import { Metadata } from "next";
 import { PropsWithChildren } from "react";
 import { Toaster } from "react-hot-toast";
 
-export async function generateMetadata(): Promise<Metadata> {
-  return {
-    title: "Главная | OZON",
-    description:
-      "OZON - крупнейший онлайн-магазин, предлагающий товары для всех категорий покупателей. Отличные предложения и скидки!",
-    openGraph: {
-      title: "Главная | OZON",
-      description:
-        "OZON - крупнейший онлайн-магазин, предлагающий товары для всех категорий покупателей. Отличные предложения и скидки!",
-      url: "https://djoreh64.ru/",
-      siteName: "OZON",
-      images: [
-        {
-          url: "https://djoreh64.ru/images/logo.jpg",
-          width: 1200,
-          height: 630,
-          alt: "OZON - Онлайн магазин",
-        },
-      ],
-      type: "website",
+export const metadata: Metadata = {
+  icons: [
+    {
+      url: "/icon-192x192.png",
+      sizes: "192x192",
+      type: "image/png",
     },
-    twitter: {
-      card: "summary_large_image",
-      title: "Главная | OZON",
-      description:
-        "OZON - крупнейший онлайн-магазин, предлагающий товары для всех категорий покупателей. Отличные предложения и скидки!",
-      images: ["https://djoreh64.ru/images/logo.jpg"],
-      creator: "@Ozon",
+    {
+      url: "/icon-256x256.png",
+      sizes: "256x256",
+      type: "image/png",
     },
-    robots: "index, follow",
-    keywords: "OZON, интернет-магазин, товары, скидки, покупки онлайн",
-    authors: [{ name: "OZON" }],
-  };
-}
-
-export const viewport = {
-  width: "device-width",
-  initialScale: 1.0,
+    {
+      url: "/icon-512x512.png",
+      sizes: "512x512",
+      type: "image/png",
+    },
+  ],
+  appleWebApp: {
+    statusBarStyle: "black-translucent",
+  },
 };
 
 const RootLayout = ({
