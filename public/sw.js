@@ -12,7 +12,5 @@ self.addEventListener("push", (event) => {
 
 self.addEventListener("notificationclick", (event) => {
   event.notification.close();
-  event.waitUntil(
-    clients.openWindow("https://djoreh64.ru") 
-  );
+  event.waitUntil(clients.openWindow("https://djoreh64.ru"));
 });
