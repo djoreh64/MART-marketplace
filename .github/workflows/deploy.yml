@@ -3,7 +3,7 @@ name: Deploy Next.js project
 on:
   push:
     branches:
-      - main  
+      - main
 
 jobs:
   deploy:
@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '22'
+          node-version: "22"
 
       - name: Install dependencies
         run: yarn install
@@ -28,16 +28,16 @@ jobs:
         run: |
           echo "Starting SSH setup..."
           mkdir -p ~/.ssh
-          
+
           echo "Saving private key..."
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
 
-          echo "Testing ssh-keyscan for host: 130.193.43.189"
-          ssh-keyscan -t rsa 130.193.43.189 >> ~/.ssh/known_hosts
+          echo "Testing ssh-keyscan for host: ${{ secrets.SSH_HOST }}"
+          ssh-keyscan -t rsa ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
           echo "Starting SSH deployment..."
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa djoreh64@130.193.43.189 << 'EOF'
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
             cd /var/www/html/diplomaFrontend
             git fetch --all
             git checkout main

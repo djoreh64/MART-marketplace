@@ -9,6 +9,7 @@ import styled from "styled-components";
 export const Container = styled.header`
   position: fixed;
   width: 100%;
+  z-index: 100;
   padding: 16px 0;
   top: 0;
   left: 0;
@@ -59,6 +60,7 @@ export const MobileNavbar = styled.nav`
 
 export const MobileHeader = styled.div`
   display: none;
+  z-index: 100;
   padding-bottom: 6px;
   @media screen and (max-width: 768px) {
     display: flex;
