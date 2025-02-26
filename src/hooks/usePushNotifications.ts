@@ -13,13 +13,14 @@ export const usePushNotifications = () => {
           userVisibleOnly: true,
           applicationServerKey: publicVapidKey,
         });
-
+        alert("Запросик щас пойдет.");
         await $api.post("/subscribe", { subscription });
       }
     };
 
     Notification.requestPermission().then((permission) => {
       if (permission === "granted") {
+        alert("Notification permission granted.");
         registerPush();
       }
     });
