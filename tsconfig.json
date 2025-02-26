@@ -29,6 +29,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "next.config.ts"
-, "eslint.config.ts"  ],
+, "eslint.config.ts", "public/sw.js"  ],
   "exclude": ["node_modules"]
 }
