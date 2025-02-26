@@ -8,6 +8,12 @@ const User = {
     return res.data;
   },
 
+  async subscribe() {
+    const res = await $api.get("/subscribe");
+    if (res.status !== 200) throw new Error("Ошибка подписки");
+    return res.data;
+  },
+
   async me() {
     const res = await $api.get("/users/me");
     if (res.status !== 200) throw new Error("Ошибка выхода из системы");

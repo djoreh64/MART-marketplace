@@ -1,27 +1,32 @@
 "use client";
+import { useEffect } from "react";
 
-import { useEffect, useState } from "react";
+const publicVapidKey = process.env.NEXT_PUBLIC_PUBLIC_VAPID_KEY;
 
 export const usePushNotifications = () => {
-  const [permission, setPermission] = useState("default");
-
-  const requestPermission = async () => {
-    if (!("Notification" in window)) {
-      console.error("This browser does not support notifications.");
-      return;
-    }
-
-    const permission = await Notification.requestPermission();
-    setPermission(permission);
-
-    if (permission === "granted") {
-      console.log("Notification permission granted.");
-    }
-  };
-
   useEffect(() => {
-    requestPermission();
-  }, []);
+    const registerPush = async () => {
+      if ("serviceWorker" in navigator && "PushManager" in window) {
+        const registration = await navigator.serviceWorker.ready;
+        const subscription = await registration.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: publicVapidKey,
+        });
 
-  return { permission };
+        await fetch("/api/subscribe", {
+          method: "POST",
+          body: JSON.stringify(subscription),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+      }
+    };
+
+    Notification.requestPermission().then((permission) => {
+      if (permission === "granted") {
+        registerPush();
+      }
+    });
+  }, []);
 };
