@@ -43,6 +43,7 @@ export const Navbar = styled.nav`
 
 export const MobileNavbar = styled.nav`
   display: none;
+  z-index: 100;
   align-items: center;
   justify-content: space-evenly;
   padding: 12px 25px;
