@@ -8,13 +8,23 @@ export const usePushNotifications = () => {
   useEffect(() => {
     const registerPush = async () => {
       if ("serviceWorker" in navigator && "PushManager" in window) {
-        const registration = await navigator.serviceWorker.ready;
-        const subscription = await registration.pushManager.subscribe({
-          userVisibleOnly: true,
-          applicationServerKey: publicVapidKey,
-        });
-        alert("Запросик щас пойдет.");
-        await $api.post("/subscribe", { subscription });
+        try {
+          const registration = await navigator.serviceWorker.ready;
+          console.log("Service Worker is ready:", registration);
+
+          const subscription = await registration.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: publicVapidKey,
+          });
+          console.log("Push subscription:", subscription);
+
+          alert("Запросик щас пойдет.");
+          await $api.post("/subscribe", { subscription });
+        } catch (error) {
+          console.error("Error during push subscription:", error);
+        }
+      } else {
+        console.log("Service Worker or PushManager not supported.");
       }
     };
 
