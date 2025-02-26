@@ -20,12 +20,16 @@ const Header: FC = () => {
 
   const isAuth = useAuthStore((state) => state.isAuth);
   const setIsAuth = useAuthStore((state) => state.setIsAuth);
+  const setUser = useAuthStore((state) => state.setUser);
 
   useEffect(() => {
     const checkAuth = async () => {
       try {
         const res = await $api.get("/users/me");
-        if (res.data) setIsAuth(true);
+        const user = res.data;
+        if (!user) return;
+        setIsAuth(true);
+        setUser(user);
       } catch {
         setIsAuth(false);
       }

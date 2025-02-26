@@ -2,22 +2,22 @@ import styled, { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
     @font-face {
-    font-family: "TTFirsNeue";
-    src: url("https://djoreh64.ru/fonts/TTFirsNeue-Regular.woff2") format("woff2");
-    font-weight: 400;
-    font-style: normal;
+      font-family: "TTFirsNeue";
+      src: url(${process.env.NEXT_PUBLIC_FONTS + "/TTFirsNeue-Regular.woff2"}) format("woff2");
+      font-weight: 400;
+      font-style: normal;
     }
 
     @font-face {
       font-family: "TTFirsNeue";
-      src: url("https://djoreh64.ru/fonts/TTFirsNeue-Medium.woff2") format("woff2");
+      src: url(${process.env.NEXT_PUBLIC_FONTS + "/TTFirsNeue-Medium.woff2"}) format("woff2");
       font-weight: 500;
       font-style: normal;
     }
 
     @font-face {
       font-family: "TTFirsNeue";
-      src: url("https://djoreh64.ru/fonts/TTFirsNeue-Bold.woff2") format("woff2");
+      src: url(${process.env.NEXT_PUBLIC_FONTS} + "/TTFirsNeue-Bold.woff2") format("woff2");
       font-weight: 600;
       font-style: normal;
     }
@@ -57,6 +57,12 @@ const GlobalStyle = createGlobalStyle`
 
     button, a {
       -webkit-tap-highlight-color: transparent
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0; 
     }
 
     img {

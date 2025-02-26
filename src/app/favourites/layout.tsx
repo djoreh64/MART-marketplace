@@ -4,16 +4,15 @@ import { FC, PropsWithChildren } from "react";
 export const metadata: Metadata = {
   title: "Избранное | OZON",
   description:
-    "Ознакомьтесь со списком товаров, которые вы добавили в избранное на OZON.",
+    "Ваши избранные товары на OZON. Сохраняйте понравившиеся товары и возвращайтесь к ним в любое время.",
   openGraph: {
     title: "Избранное | OZON",
-    description:
-      "Ознакомьтесь со списком товаров, которые вы добавили в избранное на OZON.",
-    url: "https://djoreh64.ru/cart",
+    description: "Ваши избранные товары на OZON.",
+    url: "https://djoreh64.ru/favourites",
     siteName: "OZON",
     images: [
       {
-        url: "https://djoreh64.ru/images/logo.jpg",
+        url: "https://djoreh64.ru/images/favourites-preview.jpg",
         width: 1200,
         height: 630,
         alt: "Избранное на OZON",
@@ -24,14 +23,9 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Избранное | OZON",
-    description:
-      "Ознакомьтесь с товарами, которые вы добавили в корзину на OZON. Выберите способ оплаты и оформления доставки.",
-    images: ["https://djoreh64.ru/images/logo.jpg"],
-    creator: "@Ozon",
+    description: "Ваши избранные товары на OZON.",
+    images: ["https://djoreh64.ru/images/favourites-preview.jpg"],
   },
-  robots: "index, follow",
-  keywords: "OZON, избранное, покупки онлайн, товары, доставка, оплата",
-  authors: [{ name: "OZON" }],
 };
 
 const Layout: FC<PropsWithChildren> = ({ children }) => {

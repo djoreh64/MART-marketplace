@@ -10,9 +10,9 @@ const Recommendations: FC = () => (
         <S.RecommendationsImage key={i} src="/flower.jpg" width={180} />
       ))}
     </S.RecommendationsImages>
-    <S.RecommendationsButtonHolder>
+    {/* <S.RecommendationsButtonHolder>
       <S.RecommendationsButton>Смотреть все</S.RecommendationsButton>
-    </S.RecommendationsButtonHolder>
+    </S.RecommendationsButtonHolder> */}
   </S.Recommendations>
 );
 

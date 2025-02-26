@@ -1,6 +1,7 @@
 "use client";
 
 import Button from "@components/button";
+import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
 
@@ -115,10 +116,9 @@ export const GoodImageHolder = styled(Link)`
   border-radius: 12px;
 `;
 
-export const GoodImage = styled.img`
-  width: 77px;
-  height: 77px;
+export const GoodImage = styled(Image)`
   border-radius: 12px;
+  object-fit: cover;
 `;
 
 export const GoodInfo = styled.div`
@@ -138,24 +138,31 @@ export const GoodActions = styled.div`
   gap: 12px;
 `;
 
-export const GoodActionsItem = styled.button`
+export const GoodActionsItem = styled.button<{ $inFavourites?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
   width: 32px;
   height: 32px;
   border-radius: 8px;
-  background-color: #f5f7fa;
+  background-color: ${({ $inFavourites, theme }) =>
+    $inFavourites ? theme.colors.errorLighter : "#f5f7fa"};
   border: none;
   cursor: pointer;
   transition: 0.3s ease-out;
 
   &:hover {
-    background-color: rgb(232, 236, 240);
+    background-color: ${({ theme, $inFavourites }) =>
+      $inFavourites ? "rgba(255, 23, 93, 0.1)" : "rgb(232, 236, 240)"};
   }
 
   &:active {
     transform: scale(0.9);
+  }
+
+  svg,
+  path {
+    transition: 0.1s ease-out;
   }
 `;
 

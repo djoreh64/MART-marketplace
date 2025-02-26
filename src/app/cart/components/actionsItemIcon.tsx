@@ -1,13 +1,13 @@
-import React, { FC } from "react";
+import React, { FC, SVGProps } from "react";
 import { Heart, Trash } from "lucide-react";
 
-interface Props {
+interface Props extends SVGProps<SVGSVGElement> {
   type: "favourite" | "delete";
 }
 
-const ActionsItemIcon: FC<Props> = ({ type }) => {
-  if (type === "favourite") return <Heart size={16} fill="#000" />;
-  return <Trash size={16} fill="#000" />;
+const ActionsItemIcon: FC<Props> = ({ type, ...props }) => {
+  if (type === "favourite") return <Heart size={16} {...props} />;
+  return <Trash fill="#000" size={16} />;
 };
 
 export default ActionsItemIcon;
