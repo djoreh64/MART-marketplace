@@ -1,6 +1,7 @@
 "use client";
 
 import Button from "@components/button";
+import Link from "next/link";
 import styled from "styled-components";
 
 export const Content = styled.div`
@@ -8,6 +9,7 @@ export const Content = styled.div`
   flex-direction: column;
   gap: 32px;
   margin-top: 26px;
+  padding-bottom: 42px;
 
   @media (max-width: 768px) {
     gap: 16px;
@@ -28,7 +30,18 @@ export const Headline = styled.h1`
 
 export const Container = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 2.5fr 9.5fr;
+  gap: 28px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+`;
+
+export const Orders = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 18px;
 
   @media (max-width: 768px) {
@@ -37,9 +50,10 @@ export const Container = styled.div`
   }
 `;
 
-export const Block = styled.div`
+export const Block = styled.div<{ $empty?: boolean }>`
   display: flex;
   flex-direction: column;
+  align-items: ${({ $empty }) => ($empty ? "center" : "flex-start")};
   gap: 18px;
   height: fit-content;
   padding: 24px;
@@ -57,6 +71,7 @@ export const Delivery = styled.div`
   margin: 0;
   font-size: 18px;
   font-weight: 500;
+  width: 100%;
   border-radius: 12px;
   background-color: #f5f7fa;
   padding: 18px;
@@ -77,9 +92,14 @@ export const GoodMain = styled.div`
   gap: 18px;
 `;
 
-export const GoodImage = styled.img`
+export const GoodImageHolder = styled(Link)`
+  border-radius: 12px;
   width: 77px;
   height: 77px;
+`;
+
+export const GoodImage = styled.img`
+  object-fit: cover;
   border-radius: 12px;
 `;
 
@@ -147,6 +167,10 @@ export const GoodOldPrice = styled.div`
   font-size: 14px;
   font-weight: 400;
   color: #637381;
+`;
+
+export const GoodQuantityHolder = styled.span`
+  color: ${({ theme }) => theme.colors.textLight};
 `;
 
 export const GoodQuantity = styled.div`
@@ -282,6 +306,25 @@ export const BuyHeaderText = styled.p`
   font-size: 14px;
   font-weight: 400;
   color: #637381;
+`;
+
+export const UserInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
+
+export const UserName = styled.h2`
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+`;
+
+export const UserBalance = styled.h3`
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.textLight};
 `;
 
 export const EmptyContent = styled.div`

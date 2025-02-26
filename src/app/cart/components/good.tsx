@@ -6,6 +6,7 @@ import * as S from "../styled";
 import ActionsItemIcon from "./actionsItemIcon";
 import { ICartItem } from "@api/cart";
 import { useCart } from "../hooks/useCart";
+import FavouritesButton from "./favouritesButton";
 
 interface Props {
   cartItem: ICartItem;
@@ -31,9 +32,11 @@ const Good: FC<Props> = ({ cartItem }) => {
         <S.GoodInfo>
           <S.GoodName>{name}</S.GoodName>
           <S.GoodActions>
-            <S.GoodActionsItem>
-              <ActionsItemIcon type="favourite" />
-            </S.GoodActionsItem>
+            <FavouritesButton
+              favoriteItemId={cartItem.favouriteItemId}
+              isInFavourites={cartItem.isInFavourites}
+              id={id}
+            />
             <S.GoodActionsItem onClick={deleteCartItem}>
               <ActionsItemIcon type="delete" />
             </S.GoodActionsItem>
