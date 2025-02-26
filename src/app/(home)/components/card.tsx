@@ -1,21 +1,17 @@
-"use client";
 import { FC } from "react";
 import * as S from "../styled";
-import Image from "next/image";
-import { IGood } from "@app/good/[id]/page";
+import { IGood } from "@api/products";
+import BuyButton from "./buyButton";
 
 interface Props {
   good: IGood;
+  isInCart: boolean;
 }
 
-const Card: FC<Props> = ({ good }) => {
-  const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
-
-  const { imageUrl: image, name, originalPrice, price } = good;
+const Card: FC<Props> = ({ good, isInCart }) => {
+  const { imageUrl: image, name, originalPrice, price, cartItemId } = good;
   const percents = originalPrice / price;
+  const sale = (percents * 100 - 100).toFixed(0);
 
   return (
     <S.Card href={`/good/${good.id}`}>
@@ -28,18 +24,15 @@ const Card: FC<Props> = ({ good }) => {
           <S.Prices>
             <S.OldPriceHolder>
               <S.OldPrice>{originalPrice} ₽</S.OldPrice>
-              <S.Sale>-{(percents * 100 - 100).toFixed(0)}%</S.Sale>
+              <S.Sale>-{sale}%</S.Sale>
             </S.OldPriceHolder>
             <S.Price>{price} ₽</S.Price>
           </S.Prices>
-          <S.CardButton onClick={handleAddToCart} primary>
-            <Image
-              src={`${process.env.NEXT_PUBLIC_CDN_PATH}/icons/cardCart.svg`}
-              width={24}
-              height={24}
-              alt="Добавить в корзину"
-            />
-          </S.CardButton>
+          <BuyButton
+            cartItemId={cartItemId}
+            isInCart={isInCart}
+            productId={good.id}
+          />
         </S.CardInfo>
       </S.CardText>
     </S.Card>

@@ -1,22 +1,16 @@
 "use client";
 
-import { useEffect } from "react";
 import Button from "@components/button";
 import { ErrorPage } from "@lib/styled";
 
 interface IError {
-  error: Error;
   reset: () => void;
 }
 
-const HomeError = ({ error, reset }: IError) => {
-  useEffect(() => {
-    console.error("Ошибка в Home:", error);
-  }, []);
-
+const HomeError = ({ reset }: IError) => {
   return (
     <ErrorPage>
-      <h2>{error.message}</h2>
+      <h2>Что-то пошло не так. Попробуйте позже</h2>
       <Button primary onClick={() => reset()}>
         Попробовать еще раз
       </Button>

@@ -1,30 +1,29 @@
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export const revalidate = 10;
 
 import { FC } from "react";
 import * as S from "./styled";
 import { Banner, Card, Recommendations } from "./components";
-import { IGood } from "@app/good/[id]/page";
+import { IGood } from "@api/products";
+import { serverFetch } from "@utils/serverFetch";
 
 const Home: FC = async () => {
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`);
-    const goods: IGood[] = await response.json();
+  const goods: IGood[] = await serverFetch("/products");
 
-    return (
-      <S.Content>
-        <Banner />
-        <S.Container>
-          <Recommendations />
-          {goods.map((good, i) => (
-            <Card good={good} key={i} />
-          ))}
-        </S.Container>
-      </S.Content>
-    );
-  } catch (error) {
-    throw new Error("Не удалось загрузить товары. Попробуйте позже.");
-  }
+  return (
+    <S.Content>
+      <Banner />
+      <S.Container>
+        <Recommendations />
+        {goods.map(({ isInCart, id, ...props }) => (
+          <Card
+            good={{ id, isInCart, ...props }}
+            key={id}
+            isInCart={isInCart}
+          />
+        ))}
+      </S.Container>
+    </S.Content>
+  );
 };
 
 export default Home;

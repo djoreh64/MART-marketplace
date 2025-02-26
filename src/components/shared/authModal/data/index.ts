@@ -24,8 +24,16 @@ export const inputFields: IInputField[] = [
   {
     type: "text",
     placeholder: "Имя",
-    name: "name",
+    name: "firstName",
     autoComplete: "cc-given-name",
+    icon: User,
+    authType: ["register"],
+  },
+  {
+    type: "text",
+    placeholder: "Фамилия",
+    name: "lastName",
+    autoComplete: "cc-family-name",
     icon: User,
     authType: ["register"],
   },

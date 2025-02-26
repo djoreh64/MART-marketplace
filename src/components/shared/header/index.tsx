@@ -9,12 +9,34 @@ import { FC, useEffect, useState } from "react";
 import { navbarListItems, navbarListItemsMobile } from "./data";
 import * as S from "./styled";
 import { LoginButton, NavbarIcon } from "./components";
+import { useAuthStore } from "@stores/auth.store";
+import $api from "@api";
 
 const Header: FC = () => {
-  const [isMobileScreen, setIsMobileScreen] = useState(false);
   const { isMobile } = useScreenSize();
+  const [isMobileScreen, setIsMobileScreen] = useState(isMobile);
   const pathname = usePathname();
   const router = useRouter();
+
+  const isAuth = useAuthStore((state) => state.isAuth);
+  const setIsAuth = useAuthStore((state) => state.setIsAuth);
+  const setUser = useAuthStore((state) => state.setUser);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const res = await $api.get("/users/me");
+        const user = res.data;
+        if (!user) return;
+        setIsAuth(true);
+        setUser(user);
+      } catch {
+        setIsAuth(false);
+      }
+    };
+
+    if (!isAuth) checkAuth();
+  }, [isAuth]);
 
   useEffect(() => {
     setIsMobileScreen(isMobile);
@@ -60,13 +82,19 @@ const Header: FC = () => {
         </S.SearchInputHolder>
         <S.NavbarList>
           {navbarListItems.map(({ src, href, text }) => (
-            <S.NavbarListLink $active={pathname === href} href={href} key={src}>
+            <S.NavbarListLink
+              $cart={src !== "cart"}
+              data-count={"3"}
+              $active={pathname === href}
+              href={href}
+              key={src}
+            >
               <NavbarIcon src={src} />
               <S.NavbarListText>{text}</S.NavbarListText>
             </S.NavbarListLink>
           ))}
         </S.NavbarList>
-        <LoginButton>Войти</LoginButton>
+        <LoginButton />
       </S.Navbar>
     </S.Container>
   );

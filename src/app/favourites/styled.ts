@@ -20,7 +20,6 @@ export const Content = styled.div`
 export const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(2, 1fr);
   gap: 21px;
 
   @media screen and (max-width: 1440px) {
@@ -41,6 +40,7 @@ export const Card = styled(Link)`
   overflow: hidden;
   border: 1px solid ${({ theme }) => theme.colors.textLighter};
   border-radius: 18px;
+  height: 300px;
   text-decoration: none;
   color: ${({ theme }) => theme.colors.text};
   background-color: ${({ theme }) => theme.colors.grayDark};
@@ -139,5 +139,58 @@ export const Headline = styled.h1`
 
   @media (max-width: 768px) {
     font-size: 24px;
+  }
+`;
+
+export const EmptyContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 520px;
+  margin: 0 auto;
+  min-height: 80vh;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`;
+
+export const EmptyHeadline = styled.h3`
+  margin: 0;
+  font-size: 32px;
+  font-weight: 600;
+  margin-top: 12px;
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+  }
+`;
+
+export const EmptyButton = styled(Button)`
+  border-radius: 12px;
+  font-size: 18px;
+  margin-top: 12px;
+  padding: 12px 24px;
+  & a {
+    text-decoration: none;
+    color: ${({ theme }) => theme.colors.base};
+  }
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
+`;
+
+export const EmptyDescription = styled.p`
+  margin: 0;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 400;
+  color: ${({ theme }) => theme.colors.textLight};
+
+  @media (max-width: 768px) {
+    font-size: 18px;
   }
 `;

@@ -1,6 +1,8 @@
 "use client";
 
 import Button from "@components/button";
+import Image from "next/image";
+import Link from "next/link";
 import styled from "styled-components";
 
 export const Content = styled.div`
@@ -8,6 +10,7 @@ export const Content = styled.div`
   flex-direction: column;
   gap: 32px;
   margin-top: 26px;
+  padding-bottom: 80px;
 
   @media (max-width: 768px) {
     gap: 16px;
@@ -107,10 +110,15 @@ export const GoodQuantity = styled.div`
   }
 `;
 
-export const GoodImage = styled.img`
+export const GoodImageHolder = styled(Link)`
   width: 77px;
   height: 77px;
   border-radius: 12px;
+`;
+
+export const GoodImage = styled(Image)`
+  border-radius: 12px;
+  object-fit: cover;
 `;
 
 export const GoodInfo = styled.div`
@@ -130,24 +138,31 @@ export const GoodActions = styled.div`
   gap: 12px;
 `;
 
-export const GoodActionsItem = styled.button`
+export const GoodActionsItem = styled.button<{ $inFavourites?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
   width: 32px;
   height: 32px;
   border-radius: 8px;
-  background-color: #f5f7fa;
+  background-color: ${({ $inFavourites, theme }) =>
+    $inFavourites ? theme.colors.errorLighter : "#f5f7fa"};
   border: none;
   cursor: pointer;
   transition: 0.3s ease-out;
 
   &:hover {
-    background-color: rgb(232, 236, 240);
+    background-color: ${({ theme, $inFavourites }) =>
+      $inFavourites ? "rgba(255, 23, 93, 0.1)" : "rgb(232, 236, 240)"};
   }
 
   &:active {
     transform: scale(0.9);
+  }
+
+  svg,
+  path {
+    transition: 0.1s ease-out;
   }
 `;
 
@@ -337,6 +352,10 @@ export const EmptyHeadline = styled.h3`
   font-size: 32px;
   font-weight: 600;
   margin-top: 12px;
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+  }
 `;
 
 export const EmptyButton = styled(Button)`
@@ -348,6 +367,10 @@ export const EmptyButton = styled(Button)`
     text-decoration: none;
     color: ${({ theme }) => theme.colors.base};
   }
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 export const EmptyDescription = styled.p`
@@ -356,4 +379,8 @@ export const EmptyDescription = styled.p`
   font-size: 24px;
   font-weight: 400;
   color: ${({ theme }) => theme.colors.textLight};
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
 `;

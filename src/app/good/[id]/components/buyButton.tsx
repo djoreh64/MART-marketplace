@@ -1,18 +1,47 @@
 "use client";
 
-import React, { FC, useState } from "react";
-import * as S from "../styled";
+import { FC, useState } from "react";
+import { StyledBuyButton } from "../styled";
+import Cart from "@api/cart";
+import { useAuthStore } from "@stores/auth.store";
+import { useRouter } from "next/navigation";
 
-const BuyButton: FC = () => {
-  const [inCart, setInCart] = useState(false);
+interface Props {
+  productId: number;
+  initialCartItemId: number;
+  isInCart: boolean;
+}
+
+const BuyButton: FC<Props> = ({ productId, isInCart, initialCartItemId }) => {
+  const router = useRouter();
+  const isAuth = useAuthStore((state) => state.isAuth);
+  const [added, setAdded] = useState(isInCart);
+  const [cartItemId, setCartItemId] = useState(initialCartItemId);
+
+  const handleClick = async () => {
+    try {
+      if (!isAuth) {
+        router.push("/login");
+        return;
+      }
+      if (added) {
+        await Cart.deleteItem(cartItemId);
+        setAdded(false);
+        setCartItemId(0);
+        return;
+      }
+      const { id } = await Cart.addItem(productId);
+      setAdded(true);
+      setCartItemId(id);
+    } catch (error) {
+      setAdded(false);
+    }
+  };
+
   return (
-    <S.BuyButton
-      onClick={() => setInCart(true)}
-      $inCart={inCart}
-      primary={inCart}
-    >
-      {inCart ? "В корзине" : "Добавить в корзину"}
-    </S.BuyButton>
+    <StyledBuyButton $inCart={added} onClick={handleClick}>
+      {added ? "Добавлено" : "Добавить в корзину"}
+    </StyledBuyButton>
   );
 };
 
