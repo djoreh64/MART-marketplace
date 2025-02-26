@@ -1,4 +1,3 @@
-// hooks/useServiceWorker.ts
 "use client";
 
 import { useEffect } from "react";
