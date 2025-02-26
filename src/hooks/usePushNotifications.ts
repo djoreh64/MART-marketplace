@@ -1,4 +1,5 @@
 "use client";
+import $api from "@api";
 import { useEffect } from "react";
 
 const publicVapidKey = process.env.NEXT_PUBLIC_PUBLIC_VAPID_KEY;
@@ -13,13 +14,7 @@ export const usePushNotifications = () => {
           applicationServerKey: publicVapidKey,
         });
 
-        await fetch("/api/subscribe", {
-          method: "POST",
-          body: JSON.stringify(subscription),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        await $api.post("/subscribe", { subscription });
       }
     };
 
