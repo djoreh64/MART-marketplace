@@ -1,11 +1,11 @@
 import React from "react";
 import * as S from "./styled";
 import Image from "next/image";
-import { Heart, Star } from "lucide-react";
+import { Star } from "lucide-react";
 import BuyButton from "./components/buyButton";
 import Goods from "@api/products";
 import { Metadata } from "next";
-import { ICartItem } from "@api/cart";
+import FavouriteButton from "./components/favouriteButton";
 import { serverFetch } from "@utils/serverFetch";
 
 export async function generateMetadata({
@@ -16,12 +16,38 @@ export async function generateMetadata({
   try {
     const id = (await params).id;
     const product = await Goods.getOne(id);
+    const productImage = product.imageUrl || "";
+
     return {
       title: `${product.name} | OZON`,
+      description: product.description || "Описание товара от OZON",
+      openGraph: {
+        title: `${product.name} | OZON`,
+        description: product.description || "Описание товара от OZON",
+        url: `https://ozon.ru/product/${id}`,
+        siteName: "OZON",
+        images: [
+          {
+            url: productImage,
+            width: 1230,
+            height: 630,
+            alt: product.name,
+          },
+        ],
+        type: "website",
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: `${product.name} | OZON`,
+        description: product.description || "Описание товара от OZON",
+        images: [productImage],
+        creator: "@Ozon",
+      },
     };
   } catch (error) {
     return {
       title: "Ошибка загрузки товара",
+      description: "Не удалось загрузить данные товара",
     };
   }
 }
@@ -29,14 +55,7 @@ export async function generateMetadata({
 const Good = async ({ params }: { params: Promise<{ id: string }> }) => {
   try {
     const id = (await params).id;
-    const good = await Goods.getOne(id);
-    let cart: ICartItem[] = [];
-
-    try {
-      cart = await serverFetch("/users/cart");
-    } catch {
-      cart = [];
-    }
+    const good = await serverFetch(`/products/${id}`);
 
     return (
       <S.Container>
@@ -79,15 +98,15 @@ const Good = async ({ params }: { params: Promise<{ id: string }> }) => {
           </S.PriceHolder>
           <S.Buttons>
             <BuyButton
-              initialCartItemId={
-                cart.find((item) => item.product.id === good.id)?.id ?? 0
-              }
+              initialCartItemId={good.cartItemId}
               productId={good.id}
-              isInCart={[...cart].some((item) => item.product.id === good.id)}
+              isInCart={good.isInCart}
             />
-            <S.FavoriteButton>
-              <Heart stroke="#005BFF" size={20} />
-            </S.FavoriteButton>
+            <FavouriteButton
+              initialFavoriteItemId={good.favouriteItemId}
+              productId={good.id}
+              isInFavourites={good.isInFavourites}
+            />
           </S.Buttons>
         </S.PurchaseBlock>
       </S.Container>

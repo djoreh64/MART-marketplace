@@ -3,7 +3,7 @@ import Good from "./good";
 import Cart from "@api/cart";
 
 const Goods: FC = async () => {
-  const { cart } = await Cart.get();
+  const cart = await Cart.get();
 
   return (
     <>

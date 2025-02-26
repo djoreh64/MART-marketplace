@@ -12,7 +12,7 @@ interface Props {
   isInCart: boolean;
 }
 
-const BuyButton: FC<Props> = ({ productId, initialCartItemId, isInCart }) => {
+const BuyButton: FC<Props> = ({ productId, isInCart, initialCartItemId }) => {
   const router = useRouter();
   const isAuth = useAuthStore((state) => state.isAuth);
   const [added, setAdded] = useState(isInCart);
@@ -30,9 +30,9 @@ const BuyButton: FC<Props> = ({ productId, initialCartItemId, isInCart }) => {
         setCartItemId(0);
         return;
       }
-      const newItem = await Cart.addItem(productId);
+      const { id } = await Cart.addItem(productId);
       setAdded(true);
-      setCartItemId(newItem.id);
+      setCartItemId(id);
     } catch (error) {
       setAdded(false);
     }

@@ -9,8 +9,9 @@ interface Props {
 }
 
 const Card: FC<Props> = ({ good, isInCart }) => {
-  const { imageUrl: image, name, originalPrice, price } = good;
+  const { imageUrl: image, name, originalPrice, price, cartItemId } = good;
   const percents = originalPrice / price;
+  const sale = (percents * 100 - 100).toFixed(0);
 
   return (
     <S.Card href={`/good/${good.id}`}>
@@ -23,11 +24,15 @@ const Card: FC<Props> = ({ good, isInCart }) => {
           <S.Prices>
             <S.OldPriceHolder>
               <S.OldPrice>{originalPrice} ₽</S.OldPrice>
-              <S.Sale>-{(percents * 100 - 100).toFixed(0)}%</S.Sale>
+              <S.Sale>-{sale}%</S.Sale>
             </S.OldPriceHolder>
             <S.Price>{price} ₽</S.Price>
           </S.Prices>
-          <BuyButton isInCart={isInCart} productId={good.id} />
+          <BuyButton
+            cartItemId={cartItemId}
+            isInCart={isInCart}
+            productId={good.id}
+          />
         </S.CardInfo>
       </S.CardText>
     </S.Card>

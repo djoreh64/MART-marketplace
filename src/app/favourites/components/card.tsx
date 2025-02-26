@@ -1,46 +1,38 @@
 "use client";
+
 import { FC } from "react";
 import * as S from "../styled";
-import Image from "next/image";
+import { IGood } from "@api/products";
 
 interface Props {
-  href: string;
+  good: IGood;
 }
 
-const Card: FC<Props> = ({ href }) => {
-  const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
+const Card: FC<Props> = ({ good }) => {
+  const { name, id, imageUrl, originalPrice, price } = good;
+  const percents = originalPrice / price;
+  const sale = (percents * 100 - 100).toFixed(0);
 
   return (
-    <S.Card href={href}>
+    <S.Card href={`/good/${id}`}>
       <S.CardImageHolder>
         <S.CardImage
-          src={`/flower.jpg`}
+          src={imageUrl}
           alt="Комнатный цветок"
           width={300}
           height={160}
         />
       </S.CardImageHolder>
       <S.CardText>
-        <S.CardTitle>Комнатный цветок</S.CardTitle>
+        <S.CardTitle>{name}</S.CardTitle>
         <S.CardInfo>
           <S.Prices>
             <S.OldPriceHolder>
-              <S.OldPrice>999 ₽</S.OldPrice>
-              <S.Sale>-10%</S.Sale>
+              <S.OldPrice>{originalPrice} ₽</S.OldPrice>
+              <S.Sale>-{sale}%</S.Sale>
             </S.OldPriceHolder>
-            <S.Price>499 ₽</S.Price>
+            <S.Price>{price} ₽</S.Price>
           </S.Prices>
-          <S.CardButton onClick={handleAddToCart} primary>
-            <Image
-              src={`${process.env.NEXT_PUBLIC_CDN_PATH}/icons/cardCart.svg`}
-              width={24}
-              height={24}
-              alt="Добавить в корзину"
-            />
-          </S.CardButton>
         </S.CardInfo>
       </S.CardText>
     </S.Card>

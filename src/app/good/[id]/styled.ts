@@ -31,12 +31,12 @@ export const ImageHolder = styled.div`
   }
 
   @media (max-width: 768px) {
-    height: 300px;
+    height: 400px;
     padding: 12px;
     background-color: ${(props) => props.theme.colors.base};
     img {
       height: 100%;
-      border-radius: 18px
+      border-radius: 18px;
     }
   }
 `;
@@ -221,7 +221,7 @@ export const StyledBuyButton = styled(Button)<{ $inCart: boolean }>`
   }
 `;
 
-export const FavoriteButton = styled(Button)`
+export const FavoriteButton = styled(Button)<{ $inFavorites: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -229,6 +229,13 @@ export const FavoriteButton = styled(Button)`
   width: 50px;
   height: 50px;
   border: none;
-  background-color: ${(props) => props.theme.colors.primaryLighter};
+  background-color: ${({ theme, $inFavorites }) =>
+    $inFavorites ? theme.colors.errorLighter : theme.colors.primaryLighter};
   border-radius: 12px;
+  transition: 0.2s ease-out;
+
+  svg,
+  path {
+    transition: 0.1s ease-out;
+  }
 `;

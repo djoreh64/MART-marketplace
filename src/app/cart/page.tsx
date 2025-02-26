@@ -9,6 +9,8 @@ import CartController from "@api/cart";
 import { useCartStore } from "@stores/cart.store";
 import { Loader, LoaderWrapper } from "@components/button/styled";
 import toast from "react-hot-toast";
+import Orders from "@api/order";
+import { AxiosError } from "axios";
 
 const Cart: FC = () => {
   const [loading, setLoading] = useState(true);
@@ -22,13 +24,24 @@ const Cart: FC = () => {
 
   const getCart = async () => {
     try {
-      const { cart } = await CartController.get();
+      const cart = await CartController.get();
       recalculateTotals(cart);
       setCart(cart);
     } catch {
       toast.error("Ошибка при получении корзины:");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleAddOrder = async () => {
+    try {
+      await Orders.create(cart);
+      setCart([]);
+      toast.success("Заказ успешно оформлен!");
+    } catch (error) {
+      if (error instanceof AxiosError)
+        toast.error(error.response?.data?.message);
     }
   };
 
@@ -79,7 +92,7 @@ const Cart: FC = () => {
           ))}
         </S.Block>
         <S.Block>
-          <S.BuyButton>Оформить заказ</S.BuyButton>
+          <S.BuyButton onClick={handleAddOrder}>Оформить заказ</S.BuyButton>
           <S.BuyBlock>
             <S.BuyHeader>
               <S.BuyHeaderTitle>Ваша корзина</S.BuyHeaderTitle>

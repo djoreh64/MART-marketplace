@@ -2,12 +2,14 @@
 
 import Button from "@components/button";
 import Input from "@components/input";
+import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
 
 export const Container = styled.header`
   position: fixed;
   width: 100%;
+  z-index: 100;
   padding: 16px 0;
   top: 0;
   left: 0;
@@ -41,6 +43,7 @@ export const Navbar = styled.nav`
 
 export const MobileNavbar = styled.nav`
   display: none;
+  z-index: 100;
   align-items: center;
   justify-content: space-evenly;
   padding: 12px 25px;
@@ -58,6 +61,7 @@ export const MobileNavbar = styled.nav`
 
 export const MobileHeader = styled.div`
   display: none;
+  z-index: 100;
   padding-bottom: 6px;
   @media screen and (max-width: 768px) {
     display: flex;
@@ -152,7 +156,7 @@ export const NavbarList = styled.ul`
   padding-left: 0;
 `;
 
-export const NavbarIcon = styled.img`
+export const NavbarIcon = styled(Image)`
   transition: 0.1s ease-out;
 `;
 
