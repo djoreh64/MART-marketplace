@@ -69,9 +69,13 @@ export const RecommendationsImages = styled.div`
   margin-top: 28px;
 `;
 
+export const RecommendationsItem = styled(Link)`
+  display: flex;
+`;
+
 export const RecommendationsImage = styled.img`
   width: 100%;
-  object-fit: contain;
+  object-fit: cover;
   border-radius: 12px;
 `;
 

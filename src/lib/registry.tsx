@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { FC, PropsWithChildren, useState } from "react";
 import { useServerInsertedHTML } from "next/navigation";
 import {
   ServerStyleSheet,
@@ -9,13 +9,9 @@ import {
 } from "styled-components";
 import { GlobalStyle, lightTheme as theme } from "./styled";
 
-export default function StyledComponentsRegistry({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+const StyledComponentsRegistry: FC<PropsWithChildren> = ({ children }) => {
   const [styledComponentsStyleSheet] = useState(() => new ServerStyleSheet());
-  
+
   useServerInsertedHTML(() => {
     const styles = styledComponentsStyleSheet.getStyleElement();
     styledComponentsStyleSheet.instance.clearTag();
@@ -39,4 +35,6 @@ export default function StyledComponentsRegistry({
       </StyleSheetManager>
     </ThemeProvider>
   );
-}
+};
+
+export default StyledComponentsRegistry;

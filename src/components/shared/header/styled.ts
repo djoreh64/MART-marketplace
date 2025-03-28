@@ -78,6 +78,82 @@ export const Title = styled(Link)`
   color: inherit;
 `;
 
+export const SearchModalHolder = styled.div`
+  position: relative;
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+`;
+
+export const SearchModal = styled.div`
+  position: absolute;
+  top: 120%;
+  width: 100%;
+  background-color: ${({ theme }) => theme.colors.base};
+  border-radius: 24px;
+  border: 1px solid ${({ theme }) => theme.colors.textLighter};
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  img {
+    border-radius: 12px;
+  }
+`;
+
+export const SearchModalTitle = styled.h3`
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+`;
+
+export const SearchModalText = styled.p`
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+`;
+
+export const SearchModalItem = styled(Link)`
+  display: flex;
+  align-items: center;
+  padding: 12px 24px;
+  gap: 12px;
+  text-decoration: none;
+  border-radius: 16px;
+  transition: 0.2s ease-out;
+
+  &:hover {
+    transform: scale(1.01);
+  }
+`;
+
+export const SearchModalItemInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+`;
+
+export const SearchModalItemName = styled.p`
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.text};
+`;
+
+export const SearchModalItemPrice = styled.p`
+  margin: 0;
+  font-size: 12px;
+  font-weight: 400;
+  color: ${({ theme }) => theme.colors.textLight};
+`;
+
+export const SearchModalLink = styled.a`
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: none;
+  color: inherit;
+`;
+
 export const SearchInput = styled(Input).attrs({
   type: "search",
   placeholder: "Искать на сайте",
@@ -118,7 +194,7 @@ export const SearchInputHolder = styled.div<{ $icon?: boolean }>`
   border-radius: 14px;
   overflow: hidden;
   border: 2px solid ${({ theme }) => theme.colors.primary};
-  border-left-width: 3px;
+  border-left-width: 4px;
   &::before {
     content: "";
     position: absolute;

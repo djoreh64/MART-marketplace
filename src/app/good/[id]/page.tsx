@@ -19,13 +19,13 @@ export async function generateMetadata({
     const productImage = product.imageUrl || "";
 
     return {
-      title: `${product.name} | OZON`,
-      description: product.description || "Описание товара от OZON",
+      title: `${product.name} | MART`,
+      description: product.description || "Описание товара от MART",
       openGraph: {
-        title: `${product.name} | OZON`,
-        description: product.description || "Описание товара от OZON",
-        url: `https://ozon.ru/product/${id}`,
-        siteName: "OZON",
+        title: `${product.name} | MART`,
+        description: product.description || "Описание товара от MART",
+        url: `https://MART.ru/product/${id}`,
+        siteName: "MART",
         images: [
           {
             url: productImage,
@@ -38,10 +38,10 @@ export async function generateMetadata({
       },
       twitter: {
         card: "summary_large_image",
-        title: `${product.name} | OZON`,
-        description: product.description || "Описание товара от OZON",
+        title: `${product.name} | MART`,
+        description: product.description || "Описание товара от MART",
         images: [productImage],
-        creator: "@Ozon",
+        creator: "@MART",
       },
     };
   } catch (error) {

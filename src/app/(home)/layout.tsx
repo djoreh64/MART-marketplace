@@ -2,36 +2,36 @@ import { Metadata } from "next";
 import { FC, PropsWithChildren } from "react";
 
 export const metadata: Metadata = {
-  title: "Главная | OZON",
+  title: "Главная | MART",
   description:
-    "OZON - крупнейший онлайн-магазин, предлагающий товары для всех категорий покупателей. Отличные предложения и скидки!",
+    "MART - крупнейший онлайн-магазин, предлагающий товары для всех категорий покупателей. Отличные предложения и скидки!",
   openGraph: {
-    title: "Главная | OZON",
+    title: "Главная | MART",
     description:
-      "OZON - крупнейший онлайн-магазин, предлагающий товары для всех категорий покупателей. Отличные предложения и скидки!",
+      "MART - крупнейший онлайн-магазин, предлагающий товары для всех категорий покупателей. Отличные предложения и скидки!",
     url: "https://djoreh64.ru/",
-    siteName: "OZON",
+    siteName: "MART",
     images: [
       {
         url: "https://djoreh64.ru/images/logo.jpg",
         width: 1200,
         height: 630,
-        alt: "OZON - Онлайн магазин",
+        alt: "MART - Онлайн магазин",
       },
     ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Главная | OZON",
+    title: "Главная | MART",
     description:
-      "OZON - крупнейший онлайн-магазин, предлагающий товары для всех категорий покупателей. Отличные предложения и скидки!",
+      "MART - крупнейший онлайн-магазин, предлагающий товары для всех категорий покупателей. Отличные предложения и скидки!",
     images: ["https://djoreh64.ru/images/logo.jpg"],
-    creator: "@Ozon",
+    creator: "@MART",
   },
   robots: "index, follow",
-  keywords: "OZON, интернет-магазин, товары, скидки, покупки онлайн",
-  authors: [{ name: "OZON" }],
+  keywords: "MART, интернет-магазин, товары, скидки, покупки онлайн",
+  authors: [{ name: "MART" }],
 };
 
 const Layout: FC<PropsWithChildren> = ({ children }) => {

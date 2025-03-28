@@ -14,9 +14,19 @@ export interface IGood {
   isInFavourites: boolean;
   cartItemId: number;
   favoriteItemId: number;
+  category: {
+    id: number;
+    name: string;
+  };
 }
 
 const Goods = {
+  async search(query: string): Promise<IGood[]> {
+    const res = await $api.get(`/search?query=${query}`);
+    if (res.status !== 200) throw new Error("Ошибка получения товара");
+    return res.data.results;
+  },
+
   async getOne(id: string): Promise<IGood> {
     const res = await $api.get(`/products/${id}`);
     if (res.status !== 200) throw new Error("Ошибка получения товара");

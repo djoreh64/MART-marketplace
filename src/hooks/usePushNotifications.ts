@@ -16,9 +16,6 @@ export const usePushNotifications = () => {
             userVisibleOnly: true,
             applicationServerKey: publicVapidKey,
           });
-          console.log("Push subscription:", subscription);
-
-          alert("Запросик щас пойдет.");
           await $api.post("/subscribe", { subscription });
         } catch (error) {
           console.error("Error during push subscription:", error);
@@ -30,10 +27,10 @@ export const usePushNotifications = () => {
 
     Notification.requestPermission().then((permission) => {
       if (permission === "granted") {
-        alert("Notification permission granted.");
         registerPush();
       }
     });
   }, []);
 };
 
+ 

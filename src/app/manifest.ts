@@ -2,10 +2,10 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "OZON",
-    short_name: "OZON",
+    name: "MART",
+    short_name: "MART",
     description:
-      "OZON - крупнейший онлайн-магазин, предлагающий товары для всех категорий покупателей. Отличные предложения и скидки!",
+      "MART - крупнейший онлайн-магазин, предлагающий товары для всех категорий покупателей. Отличные предложения и скидки!",
     start_url: "/",
     display: "standalone",
     background_color: "#1A6CFF",

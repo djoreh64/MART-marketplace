@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "OZON",
-  description: "OZON - лучший маркетплейс",
+  title: "MART",
+  description: "MART - лучший маркетплейс",
   icons: [
     {
       url: "/icon192x192.png",

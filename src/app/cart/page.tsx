@@ -86,7 +86,7 @@ const Cart: FC = () => {
       <S.Headline>Корзина</S.Headline>
       <S.Container>
         <S.Block>
-          <S.Delivery>Доставка Ozon</S.Delivery>
+          <S.Delivery>Доставка MART</S.Delivery>
           {cart.map((item) => (
             <Good key={item.id} cartItem={item} />
           ))}
